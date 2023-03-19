@@ -22,6 +22,7 @@ import StudentList from './components/StudentList';
 import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
 import DeleteStudent from './components/DeleteStudent';
+import PatientRecords from "./components/PatientRecords";
 
 import Home from './components/Home';
 
@@ -43,7 +44,9 @@ function App() {
               <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
               <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
               <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
-       
+              <Nav.Link as={Link} to="/patientrecords">
+                Patient Records
+              </Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -57,6 +60,7 @@ function App() {
           <Route path = "addstudent" element={<AddStudent />} />
           <Route path = "editstudent" element={<EditStudent />} />
           <Route path = "deletestudent" element={<DeleteStudent />} />
+          <Route path="patientrecords" element={<PatientRecords />} />
 
         </Routes>
     </div>
