@@ -22,7 +22,6 @@ import StudentList from './components/StudentList';
 import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
 import DeleteStudent from './components/DeleteStudent';
-import PatientDetails from "./components/PatientDetails";
 
 import Home from './components/Home';
 
@@ -32,9 +31,9 @@ function App() {
   return (
     <Router>
       
-      <Navbar bg="primary" variant="dark" expand="lg">
+      <Navbar bg="danger" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="home">React Client For GraphQL API</Navbar.Brand>
+          <Navbar.Brand href="home">Crosscare Ambulance Service System</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
@@ -44,9 +43,7 @@ function App() {
               <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
               <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
               <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
-              <Nav.Link as={Link} to="/patientdetails">
-                Patient Details
-              </Nav.Link>
+       
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -60,7 +57,6 @@ function App() {
           <Route path = "addstudent" element={<AddStudent />} />
           <Route path = "editstudent" element={<EditStudent />} />
           <Route path = "deletestudent" element={<DeleteStudent />} />
-          <Route path="patientdetails" element={<PatientDetails />} />
 
         </Routes>
     </div>
