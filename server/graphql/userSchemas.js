@@ -95,7 +95,7 @@ const userType = new GraphQLObjectType({
             //
             console.log(params)
             console.log('in isLoggedIn.....')
-            console.log(context.req.cookies['token'])
+            console.log(context.req.cookies.token)
             //const req = context.req;
             //const res = context.res;
             console.log('token: ')
