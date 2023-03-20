@@ -44,7 +44,8 @@ const CreateUser = () => {
                     email.value='';
                     password.value='';
                     //
-                                    } 
+                   // navigate('/userlist')                    
+                } 
                 }
             >
 

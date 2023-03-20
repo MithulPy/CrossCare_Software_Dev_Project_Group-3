@@ -76,6 +76,8 @@ function View (props) {
       <p>{screen}</p>
       <p>{data}</p>
       <button onClick={verifyToken}>Verify Token</button>
+      
+
       <button onClick={handleLogOut}>Log out</button>        
 
     </div>
