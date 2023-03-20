@@ -18,10 +18,10 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import './App.css';
 //
-import StudentList from './components/StudentList';
-import AddStudent from './components/AddStudent';
-import EditStudent from './components/EditStudent';
-import DeleteStudent from './components/DeleteStudent';
+
+import CreateUser from './components/CreateUser';
+
+import Login from './components/Login';
 
 import Home from './components/Home';
 
@@ -39,10 +39,8 @@ function App() {
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
 
-              <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
-              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
-              <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
-              <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+              <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
 
             </Nav>
           </Navbar.Collapse>
@@ -53,10 +51,8 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path = "home" element={<Home />} /> 
-          <Route path = "studentlist" element={<StudentList />} />
-          <Route path = "addstudent" element={<AddStudent />} />
-          <Route path = "editstudent" element={<EditStudent />} />
-          <Route path = "deletestudent" element={<DeleteStudent />} />
+          <Route path = "login" element= {< Login />}  />
+          <Route path = "createuser" element={<CreateUser />} />
 
         </Routes>
     </div>

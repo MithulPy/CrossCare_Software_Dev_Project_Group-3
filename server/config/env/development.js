@@ -1,5 +1,5 @@
 // Set the 'development' environment configuration object
 module.exports = {
-	db: 'mongodb://localhost/crud-graphql-db',
+	db: 'mongodb://127.0.0.1:27017/crud-graphql-db',
 	sessionSecret: 'developmentSessionSecret'
 };
