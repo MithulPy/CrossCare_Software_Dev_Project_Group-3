@@ -11,6 +11,7 @@ module.exports = function() {
 		}).then(() => console.log('DB Connected!'))
 		.catch(err => {
 		console.log('Error');
+		console.log(err);
 		});
 
 	// Load the 'User' model 
