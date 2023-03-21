@@ -32,8 +32,8 @@ const CreateUser = () => {
     if (error) return `Submission error! ${error.message}`;
 
     return (
-        <div className = 'entryform'>
-            <form style={{backgroundColor: "#ffdab9"}}
+        <div className = 'entryform' style={{backgroundColor: "#ffdab9"}}>
+            <form 
                 onSubmit={ e => {    
                     e.preventDefault();
                     createUser( { variables: { userName: userName.value, email: email.value, 
@@ -71,6 +71,11 @@ const CreateUser = () => {
                     <Button variant="dark"  type="submit"> Register </Button>
                     
                     <Button variant="dark"  type="submit"> Cancel </Button>
+                    <Form.Group>
+                        <Form.Label> Already Have an Account?</Form.Label>
+                        <a href="/login" >Login</a>
+                    </Form.Group> 
+
 
             </form>
         </div>

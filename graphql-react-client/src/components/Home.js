@@ -7,8 +7,9 @@ function Home(props)
 
     return (
         <div>
+            <img src='logo.png'></img>
             <h2> Crosscare Ambulance Service System</h2>
-            <p></p>
+            <h4>Welcome to our website</h4>
         </div>
     );
 

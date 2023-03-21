@@ -63,7 +63,7 @@ function Login() {
 
     // Render the login form or the welcome message based on the value of 'screen'
     return (
-        <div className="entryform">
+        <div className="entryform" style={{backgroundColor: "#ffdab9"}}>
             { screen !=='auth' ? (
                 <View screen={screen} setScreen={setScreen} /> ) : (
 
@@ -79,11 +79,19 @@ function Login() {
                         <Form.Label> Password:</Form.Label>
                         <Form.Control id="password" type="password"  onChange={(event) => setPassword(event.target.value)}
                             placeholder="Password:" />
+                          <Form.Label> Forgot Password?</Form.Label>  
                     </Form.Group>  
             
                     <Button size = "lg" variant="primary" type="submit" >
                         Login
                     </Button>
+                    <Button size = "lg" variant="primary" type="submit" >
+                        Cancel
+                    </Button>
+                    <Form.Group>
+                        <Form.Label> Don't Have an Account?</Form.Label>
+                        <a href="/createuser">Register</a>
+                    </Form.Group> 
                   
                 </Form>
             )}            
