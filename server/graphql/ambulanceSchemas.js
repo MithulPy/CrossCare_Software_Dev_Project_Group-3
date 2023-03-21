@@ -109,10 +109,83 @@ const mutation = new GraphQLObjectType({
         }
         return removedAmbulance;
       }
-    }}
+    },
+
+    addAmbulanceRequest: {
+        type: AmbulanceRequestType,
+        args: {
+          
+            ambulanceRequestId: { type: new GraphQLNonNull(GraphQLString) },
+            requesterName: { type: new GraphQLNonNull(GraphQLString) },
+            location: { type: new GraphQLNonNull(GraphQLString) },
+            status: { type: new GraphQLNonNull(GraphQLString) },
+            assignedAmbulance: { type: GraphQLString }
+        },
+        resolve: function (root, params) {
+          const ambulanceRequestModel = new AmbulanceRequestModel(params);
+          const newAmbulanceRequest = ambulanceRequestModel.save();
+          if (!newAmbulanceRequest) {
+            throw new Error('Error');
+          }
+          return newAmbulanceRequest;
+        }
+      },
+  
+      updateAmbulanceRequest: {
+        type: ambulanceType,
+        args: {
+            ambulanceRequestId: { type: new GraphQLNonNull(GraphQLString) },
+            requesterName: { type: GraphQLString },
+            location: { type: GraphQLString },
+            status: { type: GraphQLString },
+            assignedAmbulance: { type: GraphQLString }
+        },
+        resolve: function (root, params) {
+          return AmbulanceRequestModel.findByIdAndUpdate(
+            params.id,
+            { $set: params },
+            { new: true }
+          )
+            .catch(err => new Error(err))
+        }
+      },
+      deleteAmbulanceRequest: {
+        type: AmbulanceRequestType,
+        args: {
+          ambulanceRequestId: { type: new GraphQLNonNull(GraphQLString) }
+        },
+        resolve: function (root, params) {
+          const removedAmbulance = AmbulanceRequestModel.findByIdAndRemove(params.ambulanceRequestId).exec();
+          if (!removedAmbulance) {
+            throw new Error('Error')
+          }
+          return removedAmbulance;
+        }
+      },
+      assignAmbulance: {
+        type: AmbulanceRequestType,
+        args: {
+          ambulanceRequestId: { type: new GraphQLNonNull(GraphQLString) },
+          ambulanceId: { type: new GraphQLNonNull(GraphQLString) },
+        },
+        resolve: async (parent, args) => {
+          const updatedAmbulanceRequest = await AmbulanceRequestModel.findByIdAndUpdate(
+            args.ambulanceRequestId,
+            { assignedAmbulance: args.ambulanceId },
+            { new: true }
+          );
+          if (!updatedAmbulanceRequest) {
+            throw new Error('Error assigning ambulance to request');
+          }
+          return updatedAmbulanceRequest;
+        },
+      },
+
+
+    }
      } });
 
-     const AmbulanceRequestType = new GraphQLObjectType({
+    const AmbulanceRequestType = new GraphQLObjectType({
         name: 'AmbulanceRequest',
         fields: () => ({
           ambulanceRequestId: { type: GraphQLString },
@@ -132,7 +205,7 @@ const mutation = new GraphQLObjectType({
       });
       
       
-      const RootQueryType = new GraphQLObjectType({
+    const RootQueryType = new GraphQLObjectType({
         name: 'RootQuery',
         fields: {
           ambulanceRequests: {
@@ -154,7 +227,7 @@ const mutation = new GraphQLObjectType({
       });
       
       module.exports = RootQueryType;
-    
+;
 // Export the GraphQL schema
 module.exports = new GraphQLSchema({
   query: queryType,
