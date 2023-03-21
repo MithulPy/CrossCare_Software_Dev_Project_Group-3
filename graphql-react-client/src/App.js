@@ -46,6 +46,7 @@ function App() {
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
               {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
 
+
               <Nav.Link as={Link} to="/patientrecords">
                 Patient Records
               </Nav.Link>
