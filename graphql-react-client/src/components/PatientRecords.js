@@ -1,45 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, ListGroup, Card, Form, Button } from 'react-bootstrap';
 
+const departments = [
+  { id: 1, name: 'Department 1' },
+  { id: 2, name: 'Department 2' },
+  { id: 3, name: 'Department 3' },
+];
+
+const appointments = [
+  {
+    id: 1,
+    patientId: 1,
+    patientName: 'Patient 1',
+    date: '2023-03-21',
+    doctor: 'Doctor 1',
+    department: 'Department 1',
+  },
+  {
+    id: 2,
+    patientId: 2,
+    patientName: 'Patient 2',
+    date: '2023-03-22',
+    doctor: 'Doctor 2',
+    department: 'Department 2',
+  },
+  {
+    id: 3,
+    patientId: 1,
+    patientName: 'Patient 1',
+    date: '2023-03-23',
+    doctor: 'Doctor 3',
+    department: 'Department 3',
+  },
+];
+
 const PatientRecords = () => {
-  const [departments, setDepartments] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState('');
-  const [appointments, setAppointments] = useState([]);
   const [filteredPatients, setFilteredPatients] = useState([]);
-
-  useEffect(() => {
-    // Fetch departments and appointments data from API
-    const fetchDepartments = async () => {
-      try {
-        const response = await fetch('/api/departments');
-        const data = await response.json();
-        setDepartments(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    const fetchAppointments = async () => {
-      try {
-        const response = await fetch('/api/appointments');
-        const data = await response.json();
-        setAppointments(data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchDepartments();
-    fetchAppointments();
-  }, []);
 
   useEffect(() => {
     // Filter appointments by selected department and sort by date
     const filtered = appointments
-      .filter((appointment) => appointment.department === selectedDepartment)
+      .filter((appointment) => !selectedDepartment || appointment.department === selectedDepartment)
       .sort((a, b) => new Date(a.date) - new Date(b.date));
     setFilteredPatients(filtered);
-  }, [selectedDepartment, appointments]);
+  }, [selectedDepartment]);
 
   const handleDepartmentSelect = (event) => {
     setSelectedDepartment(event.target.value);
