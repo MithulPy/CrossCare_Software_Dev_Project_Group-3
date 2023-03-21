@@ -18,6 +18,8 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import './App.css';
 //
+import UserList from './components/UserList';
+import CreateUser from './components/CreateUser';
 import StudentList from './components/StudentList';
 import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
@@ -28,6 +30,7 @@ import AddAmbulance from './components/AddAmbulance';
 import AmbulanceList from './components/AmbulanceList';
 
 
+import Login from './components/Login';
 import Home from './components/Home';
 
 //
@@ -43,6 +46,9 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+              <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
+              {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
 
 
               <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
@@ -66,10 +72,10 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path = "home" element={<Home />} /> 
-          <Route path = "studentlist" element={<StudentList />} />
-          <Route path = "addstudent" element={<AddStudent />} />
-          <Route path = "editstudent" element={<EditStudent />} />
-          <Route path = "deletestudent" element={<DeleteStudent />} />
+          <Route path="login" element= {< Login />}  />
+          {/* <Route path = "userlist" element={<UserList />} /> */}
+          <Route path = "createuser" element={<CreateUser />} />
+          
 
           <Route path="patientrecords" element={<PatientRecords />} />
 
