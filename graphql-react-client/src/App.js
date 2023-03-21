@@ -22,6 +22,7 @@ import StudentList from './components/StudentList';
 import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
 import DeleteStudent from './components/DeleteStudent';
+import PatientRecords from "./components/PatientRecords";
 
 import AddAmbulance from './components/AddAmbulance';
 import AmbulanceList from './components/AmbulanceList';
@@ -35,16 +36,25 @@ function App() {
   return (
     <Router>
       
-      <Navbar bg="primary" variant="dark" expand="lg">
+      <Navbar bg="danger" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="home">React Client For GraphQL API</Navbar.Brand>
+          <Navbar.Brand href="home">Crosscare Ambulance Service System</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
 
+
+              <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
+              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
+              <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
+              <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
+              <Nav.Link as={Link} to="/patientrecords">
+                Patient Records
+              </Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
               
+
             </Nav>
 
             
@@ -60,8 +70,12 @@ function App() {
           <Route path = "addstudent" element={<AddStudent />} />
           <Route path = "editstudent" element={<EditStudent />} />
           <Route path = "deletestudent" element={<DeleteStudent />} />
+
+          <Route path="patientrecords" element={<PatientRecords />} />
+
           <Route path = "addambulance" element={<AddAmbulance />} />
           <Route path = "ambulancelist" element={<AmbulanceList />} />
+
 
         </Routes>
     </div>
