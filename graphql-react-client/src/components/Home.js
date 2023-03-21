@@ -7,9 +7,9 @@ function Home(props)
 
     return (
         <div>
-            <h2> Express - GraphQL - React with CRUD Operations</h2>
-            <p>React front-end calls Express GraphQL API to add, 
-            list, update, or delete.</p>
+            <img src='logo.png'></img>
+            <h2> Crosscare Ambulance Service System</h2>
+            <h4>Welcome to our website</h4>
         </div>
     );
 

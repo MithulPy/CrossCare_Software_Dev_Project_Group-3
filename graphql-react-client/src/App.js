@@ -18,11 +18,10 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import './App.css';
 //
-import StudentList from './components/StudentList';
-import AddStudent from './components/AddStudent';
-import EditStudent from './components/EditStudent';
-import DeleteStudent from './components/DeleteStudent';
+import UserList from './components/UserList';
+import CreateUser from './components/CreateUser';
 
+import Login from './components/Login';
 import Home from './components/Home';
 
 //
@@ -31,18 +30,17 @@ function App() {
   return (
     <Router>
       
-      <Navbar bg="primary" variant="dark" expand="lg">
+      <Navbar bg="danger" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="home">React Client For GraphQL API</Navbar.Brand>
+          <Navbar.Brand href="home">Crosscare Ambulance Service System</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
-
-              <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
-              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
-              <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
-              <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
+              <Nav.Link as={Link} to="/login">Login</Nav.Link>
+              <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
+              {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
+              
 
             </Nav>
           </Navbar.Collapse>
@@ -53,10 +51,10 @@ function App() {
         <Routes>
           <Route index element={<Home />} />
           <Route path = "home" element={<Home />} /> 
-          <Route path = "studentlist" element={<StudentList />} />
-          <Route path = "addstudent" element={<AddStudent />} />
-          <Route path = "editstudent" element={<EditStudent />} />
-          <Route path = "deletestudent" element={<DeleteStudent />} />
+          <Route path="login" element= {< Login />}  />
+          {/* <Route path = "userlist" element={<UserList />} /> */}
+          <Route path = "createuser" element={<CreateUser />} />
+          
 
         </Routes>
     </div>
