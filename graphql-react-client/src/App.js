@@ -20,6 +20,15 @@ import './App.css';
 //
 import UserList from './components/UserList';
 import CreateUser from './components/CreateUser';
+import StudentList from './components/StudentList';
+import AddStudent from './components/AddStudent';
+import EditStudent from './components/EditStudent';
+import DeleteStudent from './components/DeleteStudent';
+import PatientRecords from "./components/PatientRecords";
+
+import AddAmbulance from './components/AddAmbulance';
+import AmbulanceList from './components/AmbulanceList';
+
 
 import Login from './components/Login';
 import Home from './components/Home';
@@ -40,9 +49,21 @@ function App() {
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
               {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
+
+
+              <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
+              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
+              <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
+              <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
+              <Nav.Link as={Link} to="/patientrecords">
+                Patient Records
+              </Nav.Link>
+              <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
               
 
             </Nav>
+
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -55,6 +76,12 @@ function App() {
           {/* <Route path = "userlist" element={<UserList />} /> */}
           <Route path = "createuser" element={<CreateUser />} />
           
+
+          <Route path="patientrecords" element={<PatientRecords />} />
+
+          <Route path = "addambulance" element={<AddAmbulance />} />
+          <Route path = "ambulancelist" element={<AmbulanceList />} />
+
 
         </Routes>
     </div>
