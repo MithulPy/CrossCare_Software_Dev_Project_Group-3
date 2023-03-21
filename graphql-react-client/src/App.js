@@ -24,6 +24,10 @@ import EditStudent from './components/EditStudent';
 import DeleteStudent from './components/DeleteStudent';
 import PatientRecords from "./components/PatientRecords";
 
+import AddAmbulance from './components/AddAmbulance';
+import AmbulanceList from './components/AmbulanceList';
+
+
 import Home from './components/Home';
 
 //
@@ -40,6 +44,7 @@ function App() {
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
 
+
               <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
               <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
               <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
@@ -47,7 +52,12 @@ function App() {
               <Nav.Link as={Link} to="/patientrecords">
                 Patient Records
               </Nav.Link>
+              <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
+              
+
             </Nav>
+
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -60,7 +70,12 @@ function App() {
           <Route path = "addstudent" element={<AddStudent />} />
           <Route path = "editstudent" element={<EditStudent />} />
           <Route path = "deletestudent" element={<DeleteStudent />} />
+
           <Route path="patientrecords" element={<PatientRecords />} />
+
+          <Route path = "addambulance" element={<AddAmbulance />} />
+          <Route path = "ambulancelist" element={<AmbulanceList />} />
+
 
         </Routes>
     </div>
