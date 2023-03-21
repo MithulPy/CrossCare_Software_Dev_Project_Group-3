@@ -1,8 +1,8 @@
 import React from 'react';
 import {gql, useQuery} from "@apollo/client";
-import ListGroup from 'react-bootstrap/ListGroup';
+//import ListGroup from 'react-bootstrap/ListGroup';
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 //
 //
@@ -11,21 +11,19 @@ import Spinner from 'react-bootstrap/Spinner';
 // as JavaScript strings. This function is named gql
 //
 // note the backquotes here
-const GET_STUDENTS = gql`
+const GET_USERS = gql`
 {
-    students{
-        _id
-      firstName
-      lastName
-      program
+    users{
+      userName
+      email
       
     }
 }
 `;
 //
-const StudentList = () => {
+const UserList = () => {
 
-    const { loading, error, data , refetch } = useQuery(GET_STUDENTS);
+    const { loading, error, data , refetch } = useQuery(GET_USERS);
 
     if (loading) return <p>Loading...</p>;
     if (error) return <p>Error :(</p>;
@@ -37,18 +35,14 @@ const StudentList = () => {
             <Table >
                 <tbody>
                 <tr>
-                        <th>_id</th>
-                        <th>firstName</th>
-                        <th>lastName</th>
-                        <th>program</th>
+                        <th>userName</th>
+                        <th>email</th>
 
                 </tr>
-                {data.students.map((student, index) => (
+                {data.users.map((user, index) => (
                         <tr key={index}>
-                            <td>{student._id}</td>
-                            <td>{student.firstName}</td>
-                            <td>{student.lastName}</td>
-                            <td>{student.program}</td>
+                            <td>{user.userName}</td>
+                            <td>{user.email}</td>
 
                         </tr>
                 ))}
@@ -64,5 +58,5 @@ const StudentList = () => {
     );
 }
 
-export default StudentList
+export default UserList
 
