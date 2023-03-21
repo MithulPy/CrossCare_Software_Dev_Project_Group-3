@@ -8,6 +8,7 @@ var GraphQLString = require('graphql').GraphQLString;
 var GraphQLInt = require('graphql').GraphQLInt;
 var GraphQLDate = require('graphql-date');
 var AmbulanceModel = require('../models/ambulance');
+var AmbulanceRequestModel = require('../models/ambulanceRequest');
 
 // Create a GraphQL Object Type for Ambulance model
 const ambulanceType = new GraphQLObjectType({
@@ -111,6 +112,49 @@ const mutation = new GraphQLObjectType({
     }}
      } });
 
+     const AmbulanceRequestType = new GraphQLObjectType({
+        name: 'AmbulanceRequest',
+        fields: () => ({
+          ambulanceRequestId: { type: GraphQLString },
+          requesterName: { type: GraphQLString },
+          location: { type: GraphQLString },
+          status: { type: GraphQLString },
+          assignedAmbulance: {
+            type: ambulanceType,
+            async resolve(parent) {
+              if (!parent.assignedAmbulance) {
+                return null;
+              }
+              return await AmbulanceModel.findById(parent.assignedAmbulance);
+            },
+          },
+        }),
+      });
+      
+      
+      const RootQueryType = new GraphQLObjectType({
+        name: 'RootQuery',
+        fields: {
+          ambulanceRequests: {
+            type: new GraphQLList(AmbulanceRequestType),
+            async resolve() {
+              return await AmbulanceRequestModel.find({});
+            },
+          },
+          ambulanceRequest: {
+            type: AmbulanceRequestType,
+            args:  {
+                ambulanceRequestId: { type: new GraphQLNonNull(GraphQLID) },
+              },
+            async resolve(parent, args) {
+              return await AmbulanceRequestModel.findById(args.id);
+            },
+          },
+        },
+      });
+      
+      module.exports = RootQueryType;
+    
 // Export the GraphQL schema
 module.exports = new GraphQLSchema({
   query: queryType,

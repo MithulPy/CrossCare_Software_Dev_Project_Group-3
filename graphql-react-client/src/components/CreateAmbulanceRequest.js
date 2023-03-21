@@ -11,6 +11,7 @@ import "./entryform.css"
 //
 const ADD_AMBULANCE_REQUEST = gql`
     mutation AddAmbulanceRequest(
+        $ambulanceRequestId: String!,
         $location: String!,
         $emergencyInfo: String!,
         $status: String! ,
@@ -33,7 +34,7 @@ const CreateAmbulanceRequest = () => {
     //
     let navigate = useNavigate()
     //
-    let location, emergencyInfo, status, requesterName;
+    let location, emergencyInfo, status, requesterName,ambulanceRequestId;
     const [addAmbulanceRequest, { data, loading, error }] = useMutation(ADD_AMBULANCE_REQUEST);
 
     if (loading) return 'Submitting...';
@@ -44,7 +45,7 @@ const CreateAmbulanceRequest = () => {
             <form
                 onSubmit={ e => {    
                     e.preventDefault();
-                    addAmbulanceRequest( { variables: { location: location.value, emergencyInfo: emergencyInfo.value, 
+                    addAmbulanceRequest( { variables: { ambulanceRequestId:ambulanceRequestId.value,location: location.value, emergencyInfo: emergencyInfo.value, 
                         status: status.value, requesterName: requesterName.value, } 
                     });
                     //
@@ -52,10 +53,16 @@ const CreateAmbulanceRequest = () => {
                     emergencyInfo.value='';
                     status.value='';
                     requesterName.value='';
+                    ambulanceRequestId.value='';
                     navigate('/ambulanceRequestList')                    } 
                 }
             >
 
+                    <Form.Group>
+                        <Form.Label>Ambulance Request Id:</Form.Label>
+                        <Form.Control type="text"  name="ambulanceRequestId" ref={node => {ambulanceRequestId = node; }} 
+                            placeholder="Enter the ambulance request id" />
+                    </Form.Group>   
                     <Form.Group>
                         <Form.Label>Location:</Form.Label>
                         <Form.Control type="text"  name="location" ref={node => {location = node; }} 
