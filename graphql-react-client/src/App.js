@@ -18,12 +18,8 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import './App.css';
 //
-import UserList from './components/UserList';
+//import UserList from './components/UserList';
 import CreateUser from './components/CreateUser';
-import StudentList from './components/StudentList';
-import AddStudent from './components/AddStudent';
-import EditStudent from './components/EditStudent';
-import DeleteStudent from './components/DeleteStudent';
 import PatientRecords from "./components/PatientRecords";
 
 import AddAmbulance from './components/AddAmbulance';
@@ -50,11 +46,6 @@ function App() {
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
               {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
 
-
-              <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
-              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
-              <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
-              <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
               <Nav.Link as={Link} to="/patientrecords">
                 Patient Records
               </Nav.Link>
