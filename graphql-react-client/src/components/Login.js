@@ -1,6 +1,6 @@
 //Login.js
 import React, { useState, useEffect } from 'react';
-//import ReactDOM from 'react-dom';
+import ReactDOM from 'react-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { gql, useQuery, useMutation } from '@apollo/client';
@@ -68,7 +68,7 @@ function Login() {
                 <View screen={screen} setScreen={setScreen} /> ) : (
 
                 <Form onSubmit={handleLogin}>
-                    
+                    <h2>SIGNIN</h2>
                     <Form.Group>
                         <Form.Label> Email:</Form.Label>
                         <Form.Control id="email" type="email"  onChange={(event) => setEmail(event.target.value)} 

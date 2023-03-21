@@ -33,7 +33,7 @@ const CreateUser = () => {
 
     return (
         <div className = 'entryform'>
-            <form
+            <form style={{backgroundColor: "#ffdab9"}}
                 onSubmit={ e => {    
                     e.preventDefault();
                     createUser( { variables: { userName: userName.value, email: email.value, 
@@ -48,7 +48,7 @@ const CreateUser = () => {
                 } 
                 }
             >
-
+                    <h2>SIGNUP</h2>
                     <Form.Group>
                         <Form.Label> User Name:</Form.Label>
                         <Form.Control type="text"  name="userName" ref={node => {userName = node; }} 
@@ -67,8 +67,10 @@ const CreateUser = () => {
                         <Form.Control type="password"  name="password" ref={node => {password = node; }} 
                             placeholder="Password:" />
                     </Form.Group>                      
-
-                    <Button variant="primary" type="submit"> Create User </Button>
+                
+                    <Button variant="dark"  type="submit"> Register </Button>
+                    
+                    <Button variant="dark"  type="submit"> Cancel </Button>
 
             </form>
         </div>

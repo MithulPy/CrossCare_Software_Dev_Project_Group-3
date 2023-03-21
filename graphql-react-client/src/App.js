@@ -30,16 +30,16 @@ function App() {
   return (
     <Router>
       
-      <Navbar bg="primary" variant="dark" expand="lg">
+      <Navbar bg="danger" variant="dark" expand="lg">
         <Container>
-          <Navbar.Brand href="home">React Client For GraphQL API</Navbar.Brand>
+          <Navbar.Brand href="home">Crosscare Ambulance Service System</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
-              <Nav.Link as={Link} to="/userlist">User List</Nav.Link>
+              {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
               
 
             </Nav>
@@ -52,7 +52,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path = "home" element={<Home />} /> 
           <Route path="login" element= {< Login />}  />
-          <Route path = "userlist" element={<UserList />} />
+          {/* <Route path = "userlist" element={<UserList />} /> */}
           <Route path = "createuser" element={<CreateUser />} />
           
 
