@@ -27,6 +27,13 @@ import AmbulanceList from './components/AmbulanceList';
 
 
 import Login from './components/Login';
+import StudentList from './components/StudentList';
+import AddStudent from './components/AddStudent';
+import EditStudent from './components/EditStudent';
+import DeleteStudent from './components/DeleteStudent';
+import PatientList from './components/PatientList';
+import AddPatient from './components/AddPatient';
+import EditPatient from './components/EditPatient';
 import Home from './components/Home';
 
 //
@@ -51,11 +58,16 @@ function App() {
                 Patient Records
               </Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
-              
-
-            </Nav>
 
             
+
+              {/* <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
+              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link> */}
+
+              <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
+              {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
+
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -75,6 +87,16 @@ function App() {
           <Route path = "ambulancelist" element={<AmbulanceList />} />
 
 
+          <Route path = "studentlist" element={<StudentList />} />
+          <Route path = "addstudent" element={<AddStudent />} />
+          <Route path = "editstudent" element={<EditStudent />} />
+          <Route path = "deletestudent" element={<DeleteStudent />} />
+
+
+              {/*PATIENT DETAILS*/ }
+          <Route path="addPatient" element={<AddPatient/>}/>
+          <Route path="editPatient" element={<EditPatient/>}/>
+          <Route path = "patientlist" element={<PatientList />} />
         </Routes>
     </div>
       
