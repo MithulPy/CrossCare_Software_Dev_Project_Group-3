@@ -20,9 +20,10 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import './App.css';
 //
-//import UserList from './components/UserList';
+import UserList from './components/UserList';
 import CreateUser from './components/CreateUser';
 import PatientRecords from "./components/PatientRecords";
+import CreateAmbulanceRequest from './components/CreateAmbulanceRequest';
 
 import AddAmbulance from './components/AddAmbulance';
 import AmbulanceList from './components/AmbulanceList';
@@ -57,6 +58,7 @@ const [color,changeColor] =useState("#FFDAB9");
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
+              <Nav.Link as={Link} to="/createambulancerequest">Create Ambulance Request</Nav.Link>
               {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
 
 
@@ -83,9 +85,8 @@ const [color,changeColor] =useState("#FFDAB9");
           <Route index element={<Home />} />
           <Route path = "home" element={<Home />} /> 
           <Route path="login" element= {< Login />}  />
-          {/* <Route path = "userlist" element={<UserList />} /> */}
           <Route path = "createuser" element={<CreateUser />} />
-          
+          <Route path = "createambulancerequest" element={<CreateAmbulanceRequest />} />
 
           <Route path="patientrecords" element={<PatientRecords />} />
 
