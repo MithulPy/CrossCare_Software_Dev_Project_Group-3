@@ -24,10 +24,10 @@ const AmbulanceRequestSchema = new Schema({
         type: String,
         required: true,
       },
-      /*assignedAmbulance: {
+      assignedAmbulance: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Ambulance',
-      },*/
+      },
 });
 
 module.exports = mongoose.model('AmbulanceRequest', AmbulanceRequestSchema);
