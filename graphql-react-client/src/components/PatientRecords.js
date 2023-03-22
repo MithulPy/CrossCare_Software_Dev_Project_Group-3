@@ -51,6 +51,8 @@ const PatientRecords = () => {
   };
 
   return (
+    <div style={{ textAlign: "center", height: "700px",   }}>
+
     <Container fluid>
       <Row>
         <Col md={4}>
@@ -104,6 +106,7 @@ const PatientRecords = () => {
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 

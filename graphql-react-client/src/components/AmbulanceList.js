@@ -30,6 +30,7 @@ const AmbulanceList = () => {
   const [ambulances, setAmbulances] = useState(sampleData);
 
   return (
+    
     <div>
       <Table>
         <thead>

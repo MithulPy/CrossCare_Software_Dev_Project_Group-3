@@ -8,7 +8,7 @@ function Home(props)
 
 
     return (
-<div style={{ textAlign: "center" }}>
+<div style={{ textAlign: "center", height: "700px"  }}>
     <img src='logo.png'></img>
     <h2> Crosscare Ambulance Service System</h2>
     <h4>Welcome to our website</h4>
