@@ -7,8 +7,7 @@ var GraphQLID = require('graphql').GraphQLID;
 var GraphQLString = require('graphql').GraphQLString;
 var GraphQLInt = require('graphql').GraphQLInt;
 var GraphQLDate = require('graphql-date');
-var AmbulanceModel = require('../models/Ambulance');
-var AmbulanceRequestModel = require('../models/AmbulanceRequest');
+var AmbulanceModel = require('../models/ambulance');
 
 // Create a GraphQL Object Type for Ambulance model
 const ambulanceType = new GraphQLObjectType({
@@ -57,7 +56,7 @@ const queryType = new GraphQLObjectType({
 
 // Create a GraphQL mutation type for CRUD operations
 const mutation = new GraphQLObjectType({
-  name: 'MutationAmbulance',
+  name: 'Mutation',
   fields: function () {
     return {
     addAmbulance: {
@@ -109,12 +108,9 @@ const mutation = new GraphQLObjectType({
         }
         return removedAmbulance;
       }
-    },
-
-    }
+    }}
      } });
-      
-;
+
 // Export the GraphQL schema
 module.exports = new GraphQLSchema({
   query: queryType,

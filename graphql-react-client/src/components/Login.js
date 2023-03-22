@@ -63,7 +63,7 @@ function Login() {
 
     // Render the login form or the welcome message based on the value of 'screen'
     return (
-        <div className="entryform" style={{backgroundColor: "#ffdab9"}}>
+        <div className="entryform" style={{backgroundColor: "#ffdab9" }}>
             { screen !=='auth' ? (
                 <View screen={screen} setScreen={setScreen} /> ) : (
 

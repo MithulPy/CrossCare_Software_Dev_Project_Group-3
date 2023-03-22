@@ -36,3 +36,22 @@
     transform: rotate(360deg);
   }
 }
+body {
+  background-color: #fffacd; /* light yellow */
+  
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+footer {
+  background-color: #DC3545;
+  padding-top: 10px;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
