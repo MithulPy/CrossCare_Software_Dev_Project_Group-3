@@ -2,19 +2,19 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const AmbulanceRequestSchema = new Schema({
-    id: {
-        type: String,
-        required: true,
-        unique: true,
-    },
+     
+  ambulanceRequestId: {
+    type: String,
+    required: true,
+  },
       location: {
         type: String,
         required: true,
       },
       status: {
         type: String,
-        enum: ['pending', 'assigned', 'completed', 'cancelled'],
-        default: 'pending',
+        enum: ['Pending', 'Assigned', 'Completed', 'Cancelled'],
+        default: 'Pending',
       },
       emergencyInfo:{
         type: String,
@@ -24,10 +24,10 @@ const AmbulanceRequestSchema = new Schema({
         type: String,
         required: true,
       },
-      assignedAmbulance: {
+      /*assignedAmbulance: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Ambulance',
-      },
+      },*/
 });
 
 module.exports = mongoose.model('AmbulanceRequest', AmbulanceRequestSchema);
