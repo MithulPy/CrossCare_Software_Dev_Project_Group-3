@@ -66,7 +66,7 @@ const CreateAmbulanceRequest = () => {
                     emergencyInfo.value='';
                     requesterName.value='';
                     ambulanceRequestId.value='';
-                    navigate('/ambulanceRequestList')                    } 
+                    navigate('/home')                    } 
                 }
             >
 

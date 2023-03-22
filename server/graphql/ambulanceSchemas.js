@@ -116,9 +116,10 @@ const mutation = new GraphQLObjectType({
         args: {
           
             ambulanceRequestId: { type: new GraphQLNonNull(GraphQLString) },
-            requesterName: { type: new GraphQLNonNull(GraphQLString) },
             location: { type: new GraphQLNonNull(GraphQLString) },
+            emergencyInfo: { type: new GraphQLNonNull(GraphQLString) },
             status: { type: new GraphQLNonNull(GraphQLString) },
+            requesterName: { type: new GraphQLNonNull(GraphQLString) }
         },
         resolve: function (root, params) {
           const ambulanceRequestModel = new AmbulanceRequestModel(params);
@@ -134,10 +135,11 @@ const mutation = new GraphQLObjectType({
       updateAmbulanceRequest: {
         type: ambulanceType,
         args: {
-            ambulanceRequestId: { type: new GraphQLNonNull(GraphQLString) },
-            requesterName: { type:  new GraphQLNonNull(GraphQLString) },
-            location: { type:  new GraphQLNonNull(GraphQLString) },
-            status: { type:  new GraphQLNonNull(GraphQLString) },
+          ambulanceRequestId: { type: new GraphQLNonNull(GraphQLString) },
+          location: { type: new GraphQLNonNull(GraphQLString) },
+          emergencyInfo: { type: new GraphQLNonNull(GraphQLString) },
+          status: { type: new GraphQLNonNull(GraphQLString) },
+          requesterName: { type: new GraphQLNonNull(GraphQLString) }
         },
         resolve: function (root, params) {
           return AmbulanceRequestModel.findByIdAndUpdate(
@@ -191,6 +193,7 @@ const mutation = new GraphQLObjectType({
           requesterName: { type: GraphQLString },
           location: { type: GraphQLString },
           status: { type: GraphQLString },
+          emergencyInfo: { type: GraphQLString },
           assignedAmbulance: {
             type: ambulanceType,
             async resolve(parent) {
