@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, ListGroup, Card, Form, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 const departments = [
   { id: 1, name: 'Department 1' },
@@ -11,25 +12,41 @@ const appointments = [
   {
     id: 1,
     patientId: 1,
-    patientName: 'Patient 1',
+    patientName: 'Abby Smith',
     date: '2023-03-21',
-    doctor: 'Doctor 1',
+    doctor: 'Dr.Jonathan Cherian',
     department: 'Department 1',
   },
   {
     id: 2,
     patientId: 2,
-    patientName: 'Patient 2',
+    patientName: 'Joe Lang',
     date: '2023-03-22',
-    doctor: 'Doctor 2',
+    doctor: 'Dr.Phillip Matthew',
     department: 'Department 2',
   },
   {
     id: 3,
-    patientId: 1,
-    patientName: 'Patient 1',
+    patientId: 3,
+    patientName: 'Tommy Johns',
     date: '2023-03-23',
-    doctor: 'Doctor 3',
+    doctor: 'Dr.Grace Chacko',
+    department: 'Department 3',
+  },
+  {
+    id: 4,
+    patientId: 4,
+    patientName: 'Sarika Keety',
+    date: '2021-05-22',
+    doctor: 'Dr.Pillai',
+    department: 'Department 2',
+  },
+  {
+    id: 5,
+    patientId: 5,
+    patientName: 'Katy Homes',
+    date: '2022-05-23',
+    doctor: 'Dr.Martin',
     department: 'Department 3',
   },
 ];
@@ -51,6 +68,8 @@ const PatientRecords = () => {
   };
 
   return (
+    <div style={{ textAlign: "center", height: "700px",   }}>
+
     <Container fluid>
       <Row>
         <Col md={4}>
@@ -91,19 +110,27 @@ const PatientRecords = () => {
                 filteredPatients.map((appointment) => (
                   <ListGroup.Item key={appointment.id}>
                     <Row>
-                      <Col xs={3}>{appointment.patientId}</Col>
+                      <Col xs={2}>{appointment.patientId}</Col>
                       <Col xs={3}>{appointment.patientName}</Col>
-                      <Col xs={3}>{appointment.date}</Col>
+                      <Col xs={2}>{appointment.date}</Col>
                       <Col xs={3}>{appointment.doctor}</Col>
+                      <Col xs={2}>
+                        <Link to={`/view-patient/${appointment.patientId}`}>
+                          <Button variant="primary" size="sm" className="ml-2">View</Button>
+                        </Link>
+                      </Col>
                     </Row>
                   </ListGroup.Item>
                 ))
+                
+                
               )}
             </ListGroup>
           </Card>
         </Col>
       </Row>
     </Container>
+    </div>
   );
 };
 
