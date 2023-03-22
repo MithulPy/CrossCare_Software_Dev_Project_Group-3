@@ -1,0 +1,19 @@
+// Load the Mongoose module and Schema object
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+// Define a new 'StudentSchema'
+const PatientSchema = new Schema({
+    id: String,
+    firstName: String,
+    lastName: String,
+    age: String,
+    diagonosis: String,
+    notes: String,
+    hcnNo: { type: Number, min: 2015, max: 2022},
+    
+	
+});
+
+// Create the 'Student' model out of the 'StudentSchema'
+module.exports = mongoose.model('Patient', PatientSchema);
