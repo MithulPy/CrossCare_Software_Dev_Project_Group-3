@@ -14,6 +14,7 @@ module.exports = function() {
 	require('../models/User');
 	require('../models/ambulance');
 	require('../models/Patient');
+	require('../models/PatientRecrods');
 
 	// Return the Mongoose connection instance
 	return db;

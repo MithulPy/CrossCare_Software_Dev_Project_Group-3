@@ -32,6 +32,8 @@ const CreateUser = () => {
     if (error) return `Submission error! ${error.message}`;
 
     return (
+        <div style={{ textAlign: "center", height: "700px"  }}>
+
         <div className = 'entryform' style={{backgroundColor: "#ffdab9"}}>
             <form 
                 onSubmit={ e => {    
@@ -78,6 +80,7 @@ const CreateUser = () => {
 
 
             </form>
+        </div>
         </div>
     );
 }
