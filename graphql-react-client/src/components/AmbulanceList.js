@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-import EditPatient from './EditPatient';
 import DispatchDetails from './DispatchDetails';
 import DispatchSuccess from './DispatchSuccess';
 
@@ -129,13 +128,7 @@ const AmbulanceList = () => {
           ))}
           </tbody>
         </Table>
-        {editing && (
-          <EditPatient
-            ambulance={editingAmbulance}
-            onSave={handleSave}
-            onCancel={handleCancel}
-          />
-        )}
+
         {tracking && (
           <DispatchDetails
             ambulance={editingAmbulance}
