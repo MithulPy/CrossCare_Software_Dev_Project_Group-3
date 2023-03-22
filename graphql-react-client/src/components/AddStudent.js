@@ -51,7 +51,7 @@ const AddStudent = () => {
                     addStudent( { variables: { firstName: firstName.value, lastName: lastName.value, 
                     email: email.value, college: college.value, program: program.value,
                     startingYear: parseInt(startingYear.value) } 
-                    });0
+                    });
                     //
                     firstName.value = '';
                     lastName.value='';

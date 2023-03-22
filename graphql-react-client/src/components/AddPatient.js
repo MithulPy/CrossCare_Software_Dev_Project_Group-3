@@ -63,7 +63,7 @@ const AddPatient = () => {
           diagonosis.value = "";
           notes.value = "";
           hcnNo.value = "";
-          //navigate('/studentlist')
+          navigate('/patientlist')
         }}
       >
         <Form.Group>
@@ -127,14 +127,14 @@ const AddPatient = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label> Starting Year:</Form.Label>
+          <Form.Label> HCN No:</Form.Label>
           <Form.Control
             type="text"
             name="hcnNo"
             ref={(node) => {
               hcnNo = node;
             }}
-            placeholder="Hcn NO:"
+            placeholder="HCN No:"
           />
         </Form.Group>
 

@@ -67,5 +67,5 @@ const PatientList = () => {
     );
 }
 
-export default StudentList
+export default PatientList
 

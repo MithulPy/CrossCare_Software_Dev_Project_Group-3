@@ -45,7 +45,7 @@ function App() {
               <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link> */}
 
               <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
-              <Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>
+              {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
 
             </Nav>
           </Navbar.Collapse>

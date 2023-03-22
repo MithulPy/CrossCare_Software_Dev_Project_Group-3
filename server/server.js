@@ -6,7 +6,8 @@ const configureMongoose = require('./config/mongoose');
 const configureExpress = require('./config/express');
 //
 const { graphqlHTTP } = require('express-graphql');
-var schema = require('./graphql/studentSchemas');
+//var schema = require('./graphql/studentSchemas');
+var schema = require('./graphql/PatientSchemas');
 var cors = require("cors");
 
 
