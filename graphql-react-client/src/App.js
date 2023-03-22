@@ -1,5 +1,7 @@
 import './App.css';
 //
+import Footer from './components/footer';
+
 import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
@@ -24,10 +26,13 @@ import PatientRecords from "./components/PatientRecords";
 
 import AddAmbulance from './components/AddAmbulance';
 import AmbulanceList from './components/AmbulanceList';
+import ViewPatientDetails from './components/ViewPatientDetails';
+import DispatchDetails from './components/DispatchDetails';
 
 
 import Login from './components/Login';
 import Home from './components/Home';
+import DispatchSuccess from './components/DispatchSuccess';
 
 //
 function App() {
@@ -74,7 +79,10 @@ const [color,changeColor] =useState("#FFDAB9");
 
           <Route path = "addambulance" element={<AddAmbulance />} />
           <Route path = "ambulancelist" element={<AmbulanceList />} />
-
+          <Route exact path="/" component={PatientRecords} />
+        <Route exact path="/view-patient/:patientId" element={<ViewPatientDetails/>} />
+        <Route exact path="/dispatchdetails" element={<DispatchDetails/>} />
+        <Route exact path="/dispatchsuccess" element={<DispatchSuccess/>} />
 
         </Routes>
     </div>
@@ -82,6 +90,7 @@ const [color,changeColor] =useState("#FFDAB9");
       
 
     </Router>
+    <Footer />
 
 </div>
   );
