@@ -7,8 +7,8 @@ var GraphQLID = require('graphql').GraphQLID;
 var GraphQLString = require('graphql').GraphQLString;
 var GraphQLInt = require('graphql').GraphQLInt;
 var GraphQLDate = require('graphql-date');
-var AmbulanceModel = require('../models/ambulance');
-var AmbulanceRequestModel = require('../models/ambulanceRequest');
+var AmbulanceModel = require('../models/Ambulance');
+var AmbulanceRequestModel = require('../models/AmbulanceRequest');
 
 // Create a GraphQL Object Type for Ambulance model
 const ambulanceType = new GraphQLObjectType({
@@ -57,7 +57,7 @@ const queryType = new GraphQLObjectType({
 
 // Create a GraphQL mutation type for CRUD operations
 const mutation = new GraphQLObjectType({
-  name: 'Mutation',
+  name: 'MutationAmbulance',
   fields: function () {
     return {
     addAmbulance: {
@@ -119,10 +119,10 @@ const mutation = new GraphQLObjectType({
             requesterName: { type: new GraphQLNonNull(GraphQLString) },
             location: { type: new GraphQLNonNull(GraphQLString) },
             status: { type: new GraphQLNonNull(GraphQLString) },
-            assignedAmbulance: { type: GraphQLString }
         },
         resolve: function (root, params) {
           const ambulanceRequestModel = new AmbulanceRequestModel(params);
+          console.log(params.ambulanceRequestId);
           const newAmbulanceRequest = ambulanceRequestModel.save();
           if (!newAmbulanceRequest) {
             throw new Error('Error');
@@ -135,10 +135,9 @@ const mutation = new GraphQLObjectType({
         type: ambulanceType,
         args: {
             ambulanceRequestId: { type: new GraphQLNonNull(GraphQLString) },
-            requesterName: { type: GraphQLString },
-            location: { type: GraphQLString },
-            status: { type: GraphQLString },
-            assignedAmbulance: { type: GraphQLString }
+            requesterName: { type:  new GraphQLNonNull(GraphQLString) },
+            location: { type:  new GraphQLNonNull(GraphQLString) },
+            status: { type:  new GraphQLNonNull(GraphQLString) },
         },
         resolve: function (root, params) {
           return AmbulanceRequestModel.findByIdAndUpdate(
@@ -196,6 +195,7 @@ const mutation = new GraphQLObjectType({
             type: ambulanceType,
             async resolve(parent) {
               if (!parent.assignedAmbulance) {
+                console.log("hello")
                 return null;
               }
               return await AmbulanceModel.findById(parent.assignedAmbulance);

@@ -10,22 +10,28 @@ import "./entryform.css"
 //
 //
 const ADD_AMBULANCE_REQUEST = gql`
-    mutation AddAmbulanceRequest(
+  mutation AddAmbulanceRequest(
         $ambulanceRequestId: String!,
         $location: String!,
         $emergencyInfo: String!,
         $status: String! ,
-        $requesterName: String!       
+        $requesterName: String!   
         
         ) {
         addAmbulanceRequest(
-            location: $firstName,
-            emergencyInfo: $lastName,
-            status: $email,
-            requesterName: $requesterName
+            ambulanceRequestId: $ambulanceRequestId,
+            location: $location,
+            emergencyInfo: $emergencyInfo,
+            status: $status,
+            requesterName: $requesterName,
+
             
             ) {
-            _id
+            ambulanceRequestId
+            location
+            emergencyInfo
+            status
+            requesterName
         }
     }
 `;
@@ -45,13 +51,19 @@ const CreateAmbulanceRequest = () => {
             <form
                 onSubmit={ e => {    
                     e.preventDefault();
-                    addAmbulanceRequest( { variables: { ambulanceRequestId:ambulanceRequestId.value,location: location.value, emergencyInfo: emergencyInfo.value, 
-                        status: status.value, requesterName: requesterName.value, } 
+                    console.log("ambulanceRequestId.value: " + ambulanceRequestId.value);
+                    console.log("location.value: " + location.value);
+                    console.log("emergencyInfo.value: " + emergencyInfo.value);
+                    console.log("status.value: " + 'Pending');
+                    console.log("requesterName.value: " + requesterName.value);
+                    addAmbulanceRequest( { variables: { ambulanceRequestId:ambulanceRequestId.value,
+                        location: location.value,
+                         emergencyInfo: emergencyInfo.value, status: 'Pending',
+                         requesterName: requesterName.value, } 
                     });
                     //
                     location.value = '';
                     emergencyInfo.value='';
-                    status.value='';
                     requesterName.value='';
                     ambulanceRequestId.value='';
                     navigate('/ambulanceRequestList')                    } 
