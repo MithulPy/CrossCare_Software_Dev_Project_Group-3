@@ -1,6 +1,6 @@
 import './App.css';
 //
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -31,8 +31,9 @@ import Home from './components/Home';
 
 //
 function App() {
-
+const [color,changeColor] =useState("#FFDAB9");
   return (
+    <div style={{background: color}}>
     <Router>
       
       <Navbar bg="danger" variant="dark" expand="lg">
@@ -82,7 +83,7 @@ function App() {
 
     </Router>
 
-
+</div>
   );
 }
 //<Route render ={()=> < App />} path="/" />
