@@ -3,7 +3,16 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import DispatchDetails from './DispatchDetails';
 import DispatchSuccess from './DispatchSuccess';
+import { gql, useMutation } from "@apollo/client";
 
+const SEND_EMAIL = gql`
+  mutation emailOnDispatch($ambId: String!, $rxEmail: String!){
+    emailOnDispatch(ambId: $ambId,rxEmail: $rxEmail) {
+      ambId,
+      rxEmail
+    }
+  }
+`;
 const sampleData = [
   {
     _id: '1',
@@ -49,6 +58,9 @@ const AmbulanceList = () => {
   const [tracking, setTracking] = useState(false);
   const [dispatching, setDispatching] = useState(false);
 
+  const [sendEmail, {data,loading, error }] = useMutation(SEND_EMAIL);
+
+
   const handleEdit = (ambulance) => {
     setEditing(true);
     setEditingAmbulance(ambulance);
@@ -79,9 +91,21 @@ const AmbulanceList = () => {
   };
 
   const handleDispatch = (ambulance) => {
+
+    console.log("inside handle dispatch")
+    sendEmail({
+      variables: {
+        ambId: "23",
+        rxEmail: "vimal@gmail.com",
+      },
+    });
+
     setDispatching(true);
     setEditingAmbulance(ambulance);
   };
+
+  if (loading) return "Submitting...";
+  if (error) return `Submission error! ${error.message}`;
 
   return (
     <div>
