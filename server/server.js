@@ -1,16 +1,26 @@
 // Set the 'NODE_ENV' variable
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
+const { stitchSchemas } = require('@graphql-tools/stitch');
+
 // Load the module dependencies
 const configureMongoose = require('./config/mongoose');
 const configureExpress = require('./config/express');
 //
 const { graphqlHTTP } = require('express-graphql');
-var schema = require('./graphql/userSchemas');
-//var schema = require('./graphql/studentSchemas');
-//var schema = require('./graphql/ambulanceSchemas');
-//var schema = require('./graphql/PatientSchemas');
-//var schema = require('./graphql/ambulanceRequestSchemas');
+
+var ambulanceRequestSchema = require('./graphql/ambulanceRequestSchemas');
+
+const userSchema = require('./graphql/userSchemas');
+const ambulanceSchema = require('./graphql/ambulanceSchemas');
+const patientSchema = require('./graphql/PatientSchemas');
+
+const mergedSchema = stitchSchemas({
+  subschemas: [userSchema, ambulanceSchema, patientSchema,ambulanceRequestSchema],
+});
+
+
+
 var cors = require("cors");
 const bodyParser = require('body-parser');
 
@@ -39,7 +49,7 @@ app.use(cors(corsOptions));
 // and debugging.
 app.use('/graphql', graphqlHTTP( (request, response) =>  {
   return {
-    schema: schema,
+    schema: mergedSchema,
     rootValue: global,
     graphiql: true,
     context: {

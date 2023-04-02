@@ -10,7 +10,7 @@ const PatientSchema = new Schema({
     age: String,
     diagonosis: String,
     notes: String,
-    hcnNo: { type: Number, min: 2015, max: 2022},
+    hcnNo: String
     
 	
 });

@@ -7,7 +7,6 @@ var GraphQLID = require('graphql').GraphQLID;
 var GraphQLString = require('graphql').GraphQLString;
 var GraphQLInt = require('graphql').GraphQLInt;
 var GraphQLDate = require('graphql-date');
-var StudentModel = require('../models/Student');
 var PatientModal = require('../models/Patient');
 //
 // Create a GraphQL Object Type for Student model
@@ -34,7 +33,7 @@ const patientType = new GraphQLObjectType({
           type: GraphQLString
         },
         hcnNo: {
-          type: GraphQLInt
+          type: GraphQLString
         }
         
         
@@ -51,6 +50,7 @@ const patientType = new GraphQLObjectType({
           type: new GraphQLList(patientType),
           resolve: function () {
             const patients = PatientModal.find().exec()
+            console.log(patients)
             if (!patients) {
               throw new Error('Error')
             }
@@ -67,7 +67,7 @@ const patientType = new GraphQLObjectType({
           },
           resolve: function (root, params) {
             const patientInfo = PatientModal.findById(params.id).exec()
-            if (!studentInfo) {
+            if (!patientInfo) {
               throw new Error('Error')
             }
             return patientInfo
@@ -101,12 +101,13 @@ const patientType = new GraphQLObjectType({
               type: new GraphQLNonNull(GraphQLString)
             },
             hcnNo: {
-              type: new GraphQLNonNull(GraphQLInt)
+              type: new GraphQLNonNull(GraphQLString)
             }
           },
           resolve: function (root, params) {
             const patientModel = new PatientModal(params);
             const newPatient = patientModel.save();
+            console.log(newPatient)
             if (!newPatient) {
               throw new Error('Error');
             }
@@ -136,16 +137,16 @@ const patientType = new GraphQLObjectType({
               type: new GraphQLNonNull(GraphQLString)
             },
             hcnNo: {
-              type: new GraphQLNonNull(GraphQLInt)
+              type: new GraphQLNonNull(GraphQLString)
             }
             
           },
           resolve(root, params) {
-            return PatientModel.findByIdAndUpdate(params.id, { firstName: params.firstName, 
+            return PatientModal.findByIdAndUpdate(params.id, { firstName: params.firstName, 
               lastName: params.lastName, age: params.age, diagonosis: params.diagonosis, 
               notes: params.notes, hcnNo: params.hcnNo 
                }, function (err) {
-              if (err) return next(err);
+              if (err) console.log(err);
             });
           }
         },

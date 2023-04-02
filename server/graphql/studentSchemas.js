@@ -144,7 +144,7 @@ const studentType = new GraphQLObjectType({
               lastName: params.lastName, email: params.email, college: params.college, 
               program: params.program, startingYear: params.startingYear 
                }, function (err) {
-              if (err) return next(err);
+              if (err) console.log(err);
             });
           }
         },

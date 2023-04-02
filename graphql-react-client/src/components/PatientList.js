@@ -14,11 +14,13 @@ import Spinner from 'react-bootstrap/Spinner';
 const GET_PATIENTS = gql`
 {
     patients{
-        _id
-      firstName
-      lastName
-      age
-      diagonosis
+        _id,
+      firstName,
+      lastName,
+      age,
+      diagonosis,
+      notes,
+      hcnNo
       
     }
 }
@@ -38,7 +40,6 @@ const PatientList = () => {
             <Table >
                 <tbody>
                 <tr>
-                        <th>_id</th>
                         <th>firstName</th>
                         <th>lastName</th>
                         <th>age</th>
@@ -47,7 +48,6 @@ const PatientList = () => {
                 </tr>
                 {data.patients.map((patient, index) => (
                         <tr key={index}>
-                            <td>{patient._id}</td>
                             <td>{patient.firstName}</td>
                             <td>{patient.lastName}</td>
                             <td>{patient.age}</td>
