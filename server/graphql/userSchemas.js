@@ -95,20 +95,21 @@ const userType = new GraphQLObjectType({
             //
             console.log(params)
             console.log('in isLoggedIn.....')
-            console.log(context.req.cookies.token)
+           // console.log(context.req.cookies['token'])
             //const req = context.req;
             //const res = context.res;
             console.log('token: ')
             //
             // Obtain the session token from the requests cookies,
             // which come with every request
-            const token = context.req.cookies.token
-            console.log("Hii")
-            console.log(token)
-            console.log('token from request: ',token)
+           // const token = context.req.cookies.token
+            const token = null;
             // if the cookie is not set, return 'auth'
-            if (!token) {
+            if (!context || !context.req || !context.req.cookies || !context.req.cookies.token) {
               return 'auth';
+            }
+            else {
+              token = context.req.cookies.token;
             }
             var payload;
             try {
