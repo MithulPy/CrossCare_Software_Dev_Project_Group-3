@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
 
 
-<<<<<<< Updated upstream
-=======
 
->>>>>>> Stashed changes
 const CommentBoard = () => {
  const [user1, setUser1] = useState('');
  const [user2, setUser2] = useState('');
  const [comments, setComments] = useState([]);
 
 
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
  const handleSubmit = (event) => {
  event.preventDefault();
  const comment = {
@@ -32,11 +25,7 @@ const CommentBoard = () => {
 <div>
 <h1>Comment Board</h1>
 <div>
-<<<<<<< Updated upstream
- {comments.map((comment, index) => (
-=======
 {comments.map((comment, index) => (
->>>>>>> Stashed changes
 <div key={index}>
 <strong>{comment.user}: </strong>
 <span>{comment.message}</span>
@@ -56,19 +45,14 @@ const CommentBoard = () => {
  type="text"
  id="user2"
  value={user2}
-<<<<<<< Updated upstream
-onChange={(event) => setUser2(event.target.value)}
-/>
-=======
  onChange={(event) => setUser2(event.target.value)}
  />
->>>>>>> Stashed changes
 <button type="submit">Post Comment</button>
 </form>
 </div>
  );
 };
 
-
+ 
 
 export default CommentBoard;
