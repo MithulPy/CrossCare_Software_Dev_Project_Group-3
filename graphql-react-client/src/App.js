@@ -25,18 +25,15 @@ import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
 import DeleteStudent from './components/DeleteStudent';
 import PatientRecords from "./components/PatientRecords";
-
+import CommentBoard from './components/CommentBoard';
 import AddAmbulance from './components/AddAmbulance';
 import AmbulanceList from './components/AmbulanceList';
 
 
 import Login from './components/Login';
 import Home from './components/Home';
-<<<<<<< Updated upstream
-=======
 import DispatchSuccess from './components/DispatchSuccess';
-import CommentBoard from  './components/CommentBoard';
->>>>>>> Stashed changes
+
 
 //
 function App() {
@@ -53,35 +50,18 @@ function App() {
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
-<<<<<<< Updated upstream
-=======
               <Nav.Link as={Link} to="/createambulancerequest">Create Ambulance Request</Nav.Link>
-              
->>>>>>> Stashed changes
-              {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
-
-
               <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
               <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
               <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
               <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
               <Nav.Link as={Link} to="/patientrecords">
+              <Nav.Link as={Link} to="/commentboard"></Nav.Link>
                 Patient Records
               </Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
-<<<<<<< Updated upstream
-              
-=======
-
-              <Nav.Link as={Link} to="/commentboard">Communicate</Nav.Link>
-
-              {/* <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
-              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link> */}
 
               <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
-              {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
->>>>>>> Stashed changes
-
             </Nav>
 
             
@@ -102,9 +82,7 @@ function App() {
 
           <Route path = "addambulance" element={<AddAmbulance />} />
           <Route path = "ambulancelist" element={<AmbulanceList />} />
-<<<<<<< Updated upstream
-=======
-          <Route path = "commentboard" element={<CommentBoard />} />
+          <Route path="commentboard" element={<CommentBoard />} />
           <Route exact path="/" component={PatientRecords} />npm start
         <Route exact path="/view-patient/:patientId" element={<ViewPatientDetails/>} />
         <Route exact path="/dispatchdetails" element={<DispatchDetails/>} />
@@ -114,7 +92,6 @@ function App() {
           <Route path = "addstudent" element={<AddStudent />} />
           <Route path = "editstudent" element={<EditStudent />} />
           <Route path = "deletestudent" element={<DeleteStudent />} />
->>>>>>> Stashed changes
 
 
         </Routes>

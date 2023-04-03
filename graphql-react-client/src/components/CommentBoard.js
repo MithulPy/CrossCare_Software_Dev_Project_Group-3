@@ -1,106 +1,58 @@
-import React, { useState, useEffect } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
-import { GET_MESSAGES_BY_CONVERSATION_ID, CREATE_CONVERSATION, SEND_MESSAGE } from './queries';
+import React, { useState } from 'react';
 
-function CommentBoard() {
-  const [conversationId, setConversationId] = useState('');
-  const [messageText, setMessageText] = useState('');
-  const [members, setMembers] = useState([]);
-  const [conversationName, setConversationName] = useState('');
 
-  const { loading, error, data } = useQuery(GET_MESSAGES_BY_CONVERSATION_ID, {
-    variables: { conversationId },
-  });
+const CommentBoard = () => {
+ const [user1, setUser1] = useState('');
+ const [user2, setUser2] = useState('');
+ const [comments, setComments] = useState([]);
 
-  const [createConversation] = useMutation(CREATE_CONVERSATION, {
-    update(cache, { data: { createConversation } }) {
-      cache.modify({
-        fields: {
-          conversations(existingConversations = []) {
-            const newConversationRef = cache.writeFragment({
-              data: createConversation,
-              fragment: gql`
-                fragment NewConversation on Conversation {
-                  id
-                  name
-                  members {
-                    id
-                  }
-                }
-              `,
-            });
-            return [...existingConversations, newConversationRef];
-          },
-        },
-      });
-    },
-  });
 
-  const [sendMessage] = useMutation(SEND_MESSAGE, {
-    update(cache, { data: { sendMessage } }) {
-      cache.modify({
-        fields: {
-          messages(existingMessages = []) {
-            const newMessageRef = cache.writeFragment({
-              data: sendMessage,
-              fragment: gql`
-                fragment NewMessage on Message {
-                  id
-                  conversationId
-                  authorId
-                  text
-                  timestamp
-                }
-              `,
-            });
-            return [...existingMessages, newMessageRef];
-          },
-        },
-      });
-    },
-  });
 
-  useEffect(() => {
-    if (data && data.messages) {
-      // do something with the messages
-    }
-  }, [data]);
+ const handleSubmit = (event) => {
+ event.preventDefault();
+ const comment = {
+ user: user1 ? 'User 1' : 'User 2',
+ message: user1 ? user1 : user2,
+ };
+ setComments([...comments, comment]);
+ setUser1('');
+ setUser2('');
+ };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (conversationId) {
-      await sendMessage({ variables: { conversationId, authorId: 'my-user-id', text: messageText } });
-    } else {
-      await createConversation({ variables: { name: conversationName, members } });
-    }
-    setMessageText('');
-    setConversationName('');
-    setMembers([]);
-  };
 
-  return (
-    <div>
-      {loading && <p>Loading messages...</p>}
-      {error && <p>Error loading messages</p>}
-      {data && data.messages.map((message) => (
-        <div key={message.id}>
-          <p>{message.text}</p>
-        </div>
-      ))}
-      <form onSubmit={handleSubmit}>
-        {conversationId ? (
-          <div>
-            <input type="text" value={messageText} onChange={(e) => setMessageText(e.target.value)} />
-            <button type="submit">Send</button>
-          </div>
-        ) : (
-          <div>
-            <input type="text" value={conversationName} onChange={(e) => setConversationName(e.target.value)} />
-            <input type="text" value={members} onChange={(e) => setMembers(e.target.value)} />
-            <button type="submit">Create conversation</button>
-          </div>
-        )}
-      </form>
-    </div>
-  );
-}
+
+ return (
+<div>
+<h1>Comment Board</h1>
+<div>
+ {comments.map((comment, index) => (
+<div key={index}>
+<strong>{comment.user}: </strong>
+<span>{comment.message}</span>
+</div>
+ ))}
+</div>
+<form onSubmit={handleSubmit}>
+<label htmlFor="user1">User 1:</label>
+<input
+ type="text"
+ id="user1"
+ value={user1}
+ onChange={(event) => setUser1(event.target.value)}
+ />
+<label htmlFor="user2">User 2:</label>
+<input
+ type="text"
+ id="user2"
+ value={user2}
+onChange={(event) => setUser2(event.target.value)}
+/>
+<button type="submit">Post Comment</button>
+</form>
+</div>
+ );
+};
+
+
+
+export default CommentBoard;
