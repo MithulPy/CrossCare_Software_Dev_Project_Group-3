@@ -14,7 +14,7 @@ const ADD_AMBULANCE = gql`
     $crewMembers: String!,
     $location: String!,
     $status: String!,
-    $eta: String!
+    $eta: Int!
   ) {
     addAmbulance(
       crewMembers: $crewMembers,
@@ -41,20 +41,34 @@ const AddAmbulance = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+          
+            if (!crewMembers.value || !location.value || !status.value || !eta.value) {
+              alert('Please fill in all fields');
+              return;
+            }
+          
+            const etaNum = parseInt(eta.value);
+            if (isNaN(etaNum)) {
+              alert('Please enter a valid number for ETA');
+              return;
+            }
+          
             addAmbulance({
               variables: {
                 crewMembers: crewMembers.value,
                 location: location.value,
                 status: status.value,
-                eta: eta.value,
+                eta: etaNum,
               },
             });
+          
             crewMembers.value = '';
             location.value = '';
             status.value = '';
             eta.value = '';
-            navigate('/ambulancelist');
+            navigate('/ambulancelist2');
           }}
+          
         >
           
   
@@ -84,6 +98,7 @@ const AddAmbulance = () => {
     <option value="Available">Available</option>
     <option value="On-Route">On-Route</option>
     <option value="Unavailable">Unavailable</option>
+    
   </Form.Select>
 </Form.Group>
 
@@ -91,7 +106,7 @@ const AddAmbulance = () => {
           <Form.Group>
             <Form.Label>ETA:</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="eta"
               ref={node => {eta = node; }}
               placeholder="ETA"

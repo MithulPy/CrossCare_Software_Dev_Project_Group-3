@@ -20,6 +20,21 @@ import './App.css';
 //
 import UserList from './components/UserList';
 import CreateUser from './components/CreateUser';
+<<<<<<< Updated upstream
+=======
+import PatientRecords from "./components/PatientRecords";
+import CreateAmbulanceRequest from './components/CreateAmbulanceRequest';
+
+import AddAmbulance from './components/AddAmbulance';
+import AmbulanceList from './components/AmbulanceList';
+import AmbulanceList2 from './components/AmbulanceList2';
+
+import ViewPatientDetails from './components/ViewPatientDetails';
+import DispatchDetails from './components/DispatchDetails';
+
+
+import Login from './components/Login';
+>>>>>>> Stashed changes
 import StudentList from './components/StudentList';
 import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
@@ -59,7 +74,19 @@ function App() {
                 Patient Records
               </Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
+<<<<<<< Updated upstream
               
+=======
+              <Nav.Link as={Link} to="/ambulancelist2">Ambulance List2</Nav.Link>
+
+            
+
+              {/* <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
+              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link> */}
+
+              <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
+              {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
+>>>>>>> Stashed changes
 
             </Nav>
 
@@ -81,6 +108,20 @@ function App() {
 
           <Route path = "addambulance" element={<AddAmbulance />} />
           <Route path = "ambulancelist" element={<AmbulanceList />} />
+<<<<<<< Updated upstream
+=======
+          <Route path = "ambulancelist2" element={<AmbulanceList2 />} />
+
+          <Route exact path="/" component={PatientRecords} />
+        <Route exact path="/view-patient/:patientId" element={<ViewPatientDetails/>} />
+        <Route exact path="/dispatchdetails" element={<DispatchDetails/>} />
+        <Route exact path="/dispatchsuccess" element={<DispatchSuccess/>} />
+
+          <Route path = "studentlist" element={<StudentList />} />
+          <Route path = "addstudent" element={<AddStudent />} />
+          <Route path = "editstudent" element={<EditStudent />} />
+          <Route path = "deletestudent" element={<DeleteStudent />} />
+>>>>>>> Stashed changes
 
 
         </Routes>

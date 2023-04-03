@@ -19,7 +19,7 @@ const AmbulanceSchema = new Schema({
     required: true
   },
   eta: {
-    type: String,
+    type: Number,
     required: true
   }
 });
