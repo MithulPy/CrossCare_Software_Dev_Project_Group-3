@@ -69,8 +69,8 @@ function App() {
               <Nav.Link as={Link} to="/patientrecords">
                 Patient Records
               </Nav.Link>
-              <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
-              <Nav.Link as={Link} to="/ambulancelist2">Ambulance List2</Nav.Link>
+              <Nav.Link as={Link} to="/ambulancelist2">Ambulance List</Nav.Link>
+             { /*<Nav.Link as={Link} to="/ambulancelist2">Ambulance List2</Nav.Link>*/}
 
             
 
