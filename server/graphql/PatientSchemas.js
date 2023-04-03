@@ -8,6 +8,8 @@ var GraphQLString = require('graphql').GraphQLString;
 var GraphQLInt = require('graphql').GraphQLInt;
 var GraphQLDate = require('graphql-date');
 var PatientModal = require('../models/Patient');
+var BillingInfoModal = require('../models/BillingInfo');
+const BillingInfo = require('../models/BillingInfo');
 //
 // Create a GraphQL Object Type for Student model
 const patientType = new GraphQLObjectType({
@@ -36,6 +38,54 @@ const patientType = new GraphQLObjectType({
           type: GraphQLString
         }
         
+        
+      }
+    }
+  });
+
+  const billingType = new GraphQLObjectType({
+    name: 'billing',
+    fields: function () {
+      return {
+        _id: {
+          type: GraphQLString
+        },
+        patient: {
+          type: patientType,
+          resolve(parent, args) {
+            return PatientModal.findById(parent.patientId);
+          }
+        },
+        date: {
+            type: GraphQLDate
+            },
+        time: {
+            type: GraphQLString
+            },
+        serviceType: {
+            type: GraphQLString
+            },
+        serviceProvider: {
+            type: GraphQLString
+            },
+        serviceLocation: {
+            type: GraphQLString
+            },
+        totalBillAmount: {
+            type: GraphQLInt
+            },
+        insuranceBilledAmount: {
+            type: GraphQLInt
+            },
+        amountPaid: {
+            type: GraphQLInt
+            },
+        paymentMethod: {
+            type: GraphQLString
+            },
+        paymentDate: {
+            type: GraphQLDate
+        }, 
         
       }
     }
@@ -71,6 +121,15 @@ const patientType = new GraphQLObjectType({
               throw new Error('Error')
             }
             return patientInfo
+          }
+        },
+        billingByPatientId : {
+          type: billingType,
+          args: {
+            patientId: { type: GraphQLID }
+          },
+          resolve(parent, args) {
+            return BillingInfo.find({ patientId: args.patientId });
           }
         }
       }
@@ -139,15 +198,26 @@ const patientType = new GraphQLObjectType({
             hcnNo: {
               type: new GraphQLNonNull(GraphQLString)
             }
-            
           },
-          resolve(root, params) {
-            return PatientModal.findByIdAndUpdate(params.id, { firstName: params.firstName, 
-              lastName: params.lastName, age: params.age, diagonosis: params.diagonosis, 
-              notes: params.notes, hcnNo: params.hcnNo 
-               }, function (err) {
-              if (err) console.log(err);
-            });
+          async resolve(parent, args) {
+            const updatedPatient = await PatientModal.findByIdAndUpdate(
+              args.id,
+              {
+                firstName: args.firstName,
+                lastName: args.lastName,
+                age: args.age,
+                diagnosis: args.diagnosis,
+                notes: args.notes,
+                hcnNo: args.hcnNo
+              },
+              { new: true } // Returns the updated patient record instead of the old one
+            ).exec();
+        
+            if (!updatedPatient) {
+              throw new Error(`Patient with id ${args.id} not found`);
+            }
+        
+            return updatedPatient;
           }
         },
         deletePatient: {
@@ -164,7 +234,33 @@ const patientType = new GraphQLObjectType({
             }
             return deletedPatient;
           }
-        }
+        },
+
+        addBilling: {
+          type: billingType,
+          args: {
+            patientId: { type: GraphQLString },
+            date: { type: GraphQLDate },
+            time: { type: GraphQLString },
+            serviceType: { type: GraphQLString },
+            serviceProvider: { type: GraphQLString },
+            serviceLocation: { type: GraphQLString },
+            totalBillAmount: { type: GraphQLInt },
+            insuranceBilledAmount: { type: GraphQLInt },
+            amountPaid: { type: GraphQLInt },
+            paymentMethod: { type: GraphQLString },
+            paymentDate: { type: GraphQLDate },
+          },
+          resolve: async (root, args) => {
+            try {
+              const newBilling = new BillingInfo(args);
+              const savedBilling = await newBilling.save();
+              return savedBilling;
+            } catch (error) {
+              throw new Error(`Could not create billing: ${error.message}`);
+            }
+          },
+        },
       }
     }
   });

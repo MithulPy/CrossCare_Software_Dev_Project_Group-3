@@ -105,7 +105,7 @@ const [color,changeColor] =useState("#FFDAB9");
 
               {/*PATIENT DETAILS*/ }
           <Route path="addPatient" element={<AddPatient/>}/>
-          <Route path="editPatient" element={<EditPatient/>}/>
+          <Route path="editpatient/:patientId" element={<EditPatient />} />
           <Route path = "patientlist" element={<PatientList />} />
         </Routes>
     </div>
