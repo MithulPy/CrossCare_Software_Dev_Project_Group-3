@@ -9,11 +9,8 @@ const { graphqlHTTP } = require('express-graphql');
 //var schema = require('./graphql/userSchemas');
 //var schema = require('./graphql/studentSchemas');
 var schema = require('./graphql/ambulanceSchemas');
-<<<<<<< Updated upstream
-=======
 //var schema = require('./graphql/PatientSchemas');
 //var schema = require('./graphql/ambulanceRequestSchemas');
->>>>>>> Stashed changes
 var cors = require("cors");
 const bodyParser = require('body-parser');
 
