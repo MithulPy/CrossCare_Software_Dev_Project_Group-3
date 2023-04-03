@@ -20,6 +20,19 @@ import './App.css';
 //
 import UserList from './components/UserList';
 import CreateUser from './components/CreateUser';
+<<<<<<< Updated upstream
+=======
+import PatientRecords from "./components/PatientRecords";
+import CreateAmbulanceRequest from './components/CreateAmbulanceRequest';
+import CommentBoard from './components/CommentBoard';
+import AddAmbulance from './components/AddAmbulance';
+import AmbulanceList from './components/AmbulanceList';
+import ViewPatientDetails from './components/ViewPatientDetails';
+import DispatchDetails from './components/DispatchDetails';
+
+
+import Login from './components/Login';
+>>>>>>> Stashed changes
 import StudentList from './components/StudentList';
 import AddStudent from './components/AddStudent';
 import EditStudent from './components/EditStudent';
@@ -51,10 +64,17 @@ function App() {
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
               <Nav.Link as={Link} to="/createambulancerequest">Create Ambulance Request</Nav.Link>
+<<<<<<< Updated upstream
               <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
               <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link>
               <Nav.Link as={Link} to="/editstudent">Edit  Student</Nav.Link>
               <Nav.Link as={Link} to="/deletestudent">Delete Student</Nav.Link>
+=======
+              <Nav.Link as={Link} to="/commentboard"></Nav.Link>
+              {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
+
+
+>>>>>>> Stashed changes
               <Nav.Link as={Link} to="/patientrecords">
               <Nav.Link as={Link} to="/commentboard"></Nav.Link>
                 Patient Records
@@ -79,7 +99,7 @@ function App() {
           
 
           <Route path="patientrecords" element={<PatientRecords />} />
-
+          <Route path="commentboard" element={<CommentBoard />} />
           <Route path = "addambulance" element={<AddAmbulance />} />
           <Route path = "ambulancelist" element={<AmbulanceList />} />
           <Route path="commentboard" element={<CommentBoard />} />
