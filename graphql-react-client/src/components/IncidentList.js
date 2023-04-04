@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './IncidentList.css';
-
+import { Link } from 'react-router-dom';
 // Sample incident data
 const sampleData = [
   {
@@ -37,9 +37,9 @@ const IncidentList = () => {
     setSelectedIncident(incident);
   };
 
-  // Render a table with the incident data
-  return (
-    <div>
+ // Render a table with the incident data
+ return (
+    <div className="incident-list-container">
       <h2>Incident List</h2>
       <table className="incident-list-table">
         <thead>
@@ -74,7 +74,7 @@ const IncidentList = () => {
           ))}
         </tbody>
       </table>
-
+    
       {/* Show the selected incident's details in another component */}
       {selectedIncident && (
         <IncidentDetails
@@ -86,10 +86,9 @@ const IncidentList = () => {
   );
 };
 
-// Component to display the details of a selected incident
 const IncidentDetails = ({ incident, setSelectedIncident }) => {
     return (
-      <div>
+      <div className="incident-details-container">
         <h2>Incident Details</h2>
         <p>
           <strong>Case Number:</strong> {incident.caseNumber}
@@ -121,6 +120,10 @@ const IncidentDetails = ({ incident, setSelectedIncident }) => {
         >
           Close Details
         </button>
+              {/* Create Incident button */}
+      <Link to="/createincident">
+        <button className="create-incident-button">Create Incident</button>
+      </Link>
       </div>
     );
   };
