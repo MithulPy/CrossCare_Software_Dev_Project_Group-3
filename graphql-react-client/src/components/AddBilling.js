@@ -9,26 +9,43 @@ import { Link } from "react-router-dom";
 import "./entryform.css";
 //
 //
-const ADD_BILLING_RECORD = gql`
-  mutation AddBillingRecord(
-    $patientId: String!, $date: Date!, 
-    $time: String!, $serviceType: String!, 
-    $serviceProvider: String!, $serviceLocation: String!, 
-    $totalBillAmount: Int!, $insuranceBilledAmount: Int!, $amountPaid: Int!, 
-    $paymentMethod: String!, $paymentDate: Date!) {
-    addBilling(patientId: $patientId,
-         date: $date,
-          time: $time, 
-          serviceType: $serviceType,
-          serviceProvider: $serviceProvider,
-          serviceLocation: $serviceLocation,
-          totalBillAmount: $totalBillAmount, 
-          insuranceBilledAmount: $insuranceBilledAmount,
-          amountPaid: $amountPaid,
-          paymentMethod: $paymentMethod,
-          paymentDate: $paymentDate) {
+const ADD_BILLING = gql`
+  mutation AddBilling(
+    $patientId:  String!,
+    $date: Date!,
+    $time: String!,
+    $serviceType: String!,
+    $serviceProvider: String!,
+    $serviceLocation: String!,
+    $totalBillAmount: Int!,
+    $insuranceBilledAmount: Int!,
+    $amountPaid: Int!,
+    $paymentMethod: String!,
+    $paymentDate: Date!
+  ) {
+    addBilling(
+      patientId: $patientId,
+      date: $date,
+      time: $time,
+      serviceType: $serviceType,
+      serviceProvider: $serviceProvider,
+      serviceLocation: $serviceLocation,
+      totalBillAmount: $totalBillAmount,
+      insuranceBilledAmount: $insuranceBilledAmount,
+      amountPaid: $amountPaid,
+      paymentMethod: $paymentMethod,
+      paymentDate: $paymentDate
+    ) {
       _id
-      patientId
+      patient{
+        _id
+        firstName
+        lastName
+        age
+        diagonosis
+        notes
+        hcnNo
+      }
       date
       time
       serviceType
@@ -50,7 +67,7 @@ const AddBilling = () => {
   //
   const { patientId } = useParams()
   let date, time, serviceType, serviceProvider, serviceLocation, totalBillAmount, insuranceBilledAmount, amountPaid, paymentMethod, paymentDate;
-  const [createBilling, { data, loading, error }] = useMutation(ADD_BILLING_RECORD);
+  const [createBilling, { data, loading, error }] = useMutation(ADD_BILLING);
 
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;

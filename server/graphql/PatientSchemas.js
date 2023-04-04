@@ -52,9 +52,10 @@ const patientType = new GraphQLObjectType({
         },
         patient: {
           type: patientType,
-          resolve(parent, args) {
-            return PatientModal.findById(parent.patientId);
-          }
+          resolve: async (billing) => {
+            const patient = await PatientModal.findById(billing.patientId);
+            return patient;
+          },
         },
         date: {
             type: GraphQLDate
@@ -236,31 +237,55 @@ const patientType = new GraphQLObjectType({
           }
         },
 
-        addBilling: {
-          type: billingType,
-          args: {
-            patientId: { type: GraphQLString },
-            date: { type: GraphQLDate },
-            time: { type: GraphQLString },
-            serviceType: { type: GraphQLString },
-            serviceProvider: { type: GraphQLString },
-            serviceLocation: { type: GraphQLString },
-            totalBillAmount: { type: GraphQLInt },
-            insuranceBilledAmount: { type: GraphQLInt },
-            amountPaid: { type: GraphQLInt },
-            paymentMethod: { type: GraphQLString },
-            paymentDate: { type: GraphQLDate },
-          },
-          resolve: async (root, args) => {
-            try {
-              const newBilling = new BillingInfo(args);
-              const savedBilling = await newBilling.save();
-              return savedBilling;
-            } catch (error) {
-              throw new Error(`Could not create billing: ${error.message}`);
-            }
-          },
-        },
+       
+  addBilling: {
+  type: billingType,
+  args: {
+    patientId: { type: GraphQLNonNull(GraphQLString) },
+    date: { type: GraphQLNonNull(GraphQLDate) },
+    time: { type: GraphQLNonNull(GraphQLString) },
+    serviceType: { type: GraphQLNonNull(GraphQLString) },
+    serviceProvider: { type: GraphQLNonNull(GraphQLString) },
+    serviceLocation: { type: GraphQLNonNull(GraphQLString) },
+    totalBillAmount: { type: GraphQLNonNull(GraphQLInt) },
+    insuranceBilledAmount: { type: GraphQLInt },
+    amountPaid: { type: GraphQLNonNull(GraphQLInt) },
+    paymentMethod: { type: GraphQLNonNull(GraphQLString) },
+    paymentDate: { type: GraphQLNonNull(GraphQLDate) },
+  },
+  async resolve(parent, args) {
+    try {
+      // Find the patient with the given ID
+      const patient = await PatientModal.findById(args.patientId);
+      if (!patient) throw new Error(`Patient with ID ${args.patientId} not found`);
+
+      // Create a new Billing object using the passed arguments
+      const newBilling = new BillingInfo({
+        patientId: args.patientId,
+        date: args.date,
+        time: args.time,
+        serviceType: args.serviceType,
+        serviceProvider: args.serviceProvider,
+        serviceLocation: args.serviceLocation,
+        totalBillAmount: args.totalBillAmount,
+        insuranceBilledAmount: args.insuranceBilledAmount,
+        amountPaid: args.amountPaid,
+        paymentMethod: args.paymentMethod,
+        paymentDate: args.paymentDate,
+      });
+
+      // Save the new billing object to the database
+      const savedBilling = await newBilling.save();
+
+      const populatedBilling = await savedBilling.populate('patientId').execPopulate();
+
+      return populatedBilling;
+
+    } catch (error) {
+      throw new Error(`Could not create billing: ${error.message}`);
+    }
+  }
+},
       }
     }
   });
