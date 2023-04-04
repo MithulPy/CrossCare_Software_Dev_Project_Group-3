@@ -1,0 +1,58 @@
+.incident-list-table {
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  .incident-list-table th,
+  .incident-list-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .incident-list-table th {
+    background-color: #f2f2f2;
+  }
+  
+  .view-details-button {
+    background-color: #4caf50;
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .view-details-button:hover {
+    background-color: #3e8e41;
+  }
+  
+  .close-details-button {
+    background-color: #f44336;
+    border: none;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 4px;
+    margin-top: 16px;
+  }
+  
+  .close-details-button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .incident-details-container {
+    margin-top: 32px;
+    padding: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
