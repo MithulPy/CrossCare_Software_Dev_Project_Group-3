@@ -1,6 +1,6 @@
 //Login.js
 import React, { useState, useEffect } from 'react';
-import ReactDOM from 'react-dom';
+//import ReactDOM from 'react-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { gql, useQuery, useMutation } from '@apollo/client';
@@ -63,12 +63,12 @@ function Login() {
 
     // Render the login form or the welcome message based on the value of 'screen'
     return (
-        <div className="entryform" style={{backgroundColor: "#ffdab9" }}>
+        <div className="entryform">
             { screen !=='auth' ? (
                 <View screen={screen} setScreen={setScreen} /> ) : (
 
                 <Form onSubmit={handleLogin}>
-                    <h2>SIGNIN</h2>
+                    
                     <Form.Group>
                         <Form.Label> Email:</Form.Label>
                         <Form.Control id="email" type="email"  onChange={(event) => setEmail(event.target.value)} 
@@ -79,19 +79,11 @@ function Login() {
                         <Form.Label> Password:</Form.Label>
                         <Form.Control id="password" type="password"  onChange={(event) => setPassword(event.target.value)}
                             placeholder="Password:" />
-                          <Form.Label> Forgot Password?</Form.Label>  
                     </Form.Group>  
             
                     <Button size = "lg" variant="primary" type="submit" >
                         Login
                     </Button>
-                    <Button size = "lg" variant="primary" type="submit" >
-                        Cancel
-                    </Button>
-                    <Form.Group>
-                        <Form.Label> Don't Have an Account?</Form.Label>
-                        <a href="/createuser">Register</a>
-                    </Form.Group> 
                   
                 </Form>
             )}            

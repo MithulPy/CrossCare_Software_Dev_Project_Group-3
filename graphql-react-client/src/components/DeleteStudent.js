@@ -1,16 +1,17 @@
+
 import React, { Component }  from 'react';
 
-function EditPatient(props)
+function DeleteStudent(props)
 {
 
 
     return (
         <div>
-            <h2> Edit Operation</h2>
+            <h2> Delete Operation</h2>
             <p>Complete the React code.</p>
         </div>
     );
 
 }
 
-export default EditPatient;
+export default DeleteStudent;

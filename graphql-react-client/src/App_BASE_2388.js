@@ -20,10 +20,9 @@ import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
 import './App.css';
 //
-import UserList from './components/UserList';
+//import UserList from './components/UserList';
 import CreateUser from './components/CreateUser';
 import PatientRecords from "./components/PatientRecords";
-import CreateAmbulanceRequest from './components/CreateAmbulanceRequest';
 
 import AddAmbulance from './components/AddAmbulance';
 import AmbulanceList from './components/AmbulanceList';
@@ -32,16 +31,9 @@ import DispatchDetails from './components/DispatchDetails';
 
 
 import Login from './components/Login';
-import StudentList from './components/StudentList';
-import AddStudent from './components/AddStudent';
-import EditStudent from './components/EditStudent';
-import DeleteStudent from './components/DeleteStudent';
-import PatientList from './components/PatientList';
-import AddPatient from './components/AddPatient';
-import EditPatient from './components/EditPatient';
 import Home from './components/Home';
 import DispatchSuccess from './components/DispatchSuccess';
-import IncidentList from './components/IncidentList';
+
 //
 function App() {
 const [color,changeColor] =useState("#FFDAB9");
@@ -58,7 +50,6 @@ const [color,changeColor] =useState("#FFDAB9");
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
-              <Nav.Link as={Link} to="/createambulancerequest">Create Ambulance Request</Nav.Link>
               {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
 
 
@@ -66,19 +57,11 @@ const [color,changeColor] =useState("#FFDAB9");
                 Patient Records
               </Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
-              <Nav.Link as={Link} to="/incidentlist">Incident List</Nav.Link>
-
-
-
-            
-
-              {/* <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
-              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link> */}
-
-              <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
-              {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
+              
 
             </Nav>
+
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>
@@ -88,8 +71,9 @@ const [color,changeColor] =useState("#FFDAB9");
           <Route index element={<Home />} />
           <Route path = "home" element={<Home />} /> 
           <Route path="login" element= {< Login />}  />
+          {/* <Route path = "userlist" element={<UserList />} /> */}
           <Route path = "createuser" element={<CreateUser />} />
-          <Route path = "createambulancerequest" element={<CreateAmbulanceRequest />} />
+          
 
           <Route path="patientrecords" element={<PatientRecords />} />
 
@@ -99,19 +83,7 @@ const [color,changeColor] =useState("#FFDAB9");
         <Route exact path="/view-patient/:patientId" element={<ViewPatientDetails/>} />
         <Route exact path="/dispatchdetails" element={<DispatchDetails/>} />
         <Route exact path="/dispatchsuccess" element={<DispatchSuccess/>} />
-        <Route path = "incidentlist" element={<IncidentList />} />
 
-
-          <Route path = "studentlist" element={<StudentList />} />
-          <Route path = "addstudent" element={<AddStudent />} />
-          <Route path = "editstudent" element={<EditStudent />} />
-          <Route path = "deletestudent" element={<DeleteStudent />} />
-
-
-              {/*PATIENT DETAILS*/ }
-          <Route path="addPatient" element={<AddPatient/>}/>
-          <Route path="editPatient" element={<EditPatient/>}/>
-          <Route path = "patientlist" element={<PatientList />} />
         </Routes>
     </div>
       

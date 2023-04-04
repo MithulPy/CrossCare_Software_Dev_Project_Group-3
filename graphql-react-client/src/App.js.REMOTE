@@ -41,7 +41,7 @@ import AddPatient from './components/AddPatient';
 import EditPatient from './components/EditPatient';
 import Home from './components/Home';
 import DispatchSuccess from './components/DispatchSuccess';
-import IncidentList from './components/IncidentList';
+
 //
 function App() {
 const [color,changeColor] =useState("#FFDAB9");
@@ -66,9 +66,6 @@ const [color,changeColor] =useState("#FFDAB9");
                 Patient Records
               </Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
-              <Nav.Link as={Link} to="/incidentlist">Incident List</Nav.Link>
-
-
 
             
 
@@ -99,8 +96,6 @@ const [color,changeColor] =useState("#FFDAB9");
         <Route exact path="/view-patient/:patientId" element={<ViewPatientDetails/>} />
         <Route exact path="/dispatchdetails" element={<DispatchDetails/>} />
         <Route exact path="/dispatchsuccess" element={<DispatchSuccess/>} />
-        <Route path = "incidentlist" element={<IncidentList />} />
-
 
           <Route path = "studentlist" element={<StudentList />} />
           <Route path = "addstudent" element={<AddStudent />} />

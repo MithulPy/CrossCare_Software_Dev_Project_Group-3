@@ -1,6 +1,7 @@
+
 import React, { Component }  from 'react';
 
-function EditPatient(props)
+function EditStudent(props)
 {
 
 
@@ -13,4 +14,4 @@ function EditPatient(props)
 
 }
 
-export default EditPatient;
+export default EditStudent;

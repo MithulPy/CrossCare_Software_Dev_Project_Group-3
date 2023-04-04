@@ -66,9 +66,13 @@ const [color,changeColor] =useState("#FFDAB9");
                 Patient Records
               </Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
+<<<<<<< HEAD
               <Nav.Link as={Link} to="/incidentlist">Incident List</Nav.Link>
 
 
+            </Nav>
+=======
+>>>>>>> 873521074499d98cf9666596119cd9d17622100e
 
             
 
