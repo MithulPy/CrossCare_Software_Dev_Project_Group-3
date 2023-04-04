@@ -60,9 +60,11 @@
     }
   
     .create-incident-container .input-container {
-      justify-content: space-between;
-      margin-bottom: 30px;
-    }
+        display: flex;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+      }
+      
   
     .create-incident-container button {
       width: 100%;
