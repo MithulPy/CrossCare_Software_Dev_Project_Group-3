@@ -41,6 +41,7 @@ import AddPatient from './components/AddPatient';
 import EditPatient from './components/EditPatient';
 import Home from './components/Home';
 import DispatchSuccess from './components/DispatchSuccess';
+import AddBilling from './components/AddBilling';
 
 //
 function App() {
@@ -107,6 +108,7 @@ const [color,changeColor] =useState("#FFDAB9");
           <Route path="addPatient" element={<AddPatient/>}/>
           <Route path="editpatient/:patientId" element={<EditPatient />} />
           <Route path = "patientlist" element={<PatientList />} />
+          <Route path="addbilling/:patientId" element={<AddBilling />} />
         </Routes>
     </div>
       

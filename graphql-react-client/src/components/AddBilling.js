@@ -59,6 +59,7 @@ const AddBilling = () => {
     <div className="entryform">
       <form
         onSubmit={(e) => {
+          console.log(patientId, date.value, time.value, serviceType.value, serviceProvider.value, serviceLocation.value, totalBillAmount.value, insuranceBilledAmount.value, amountPaid.value, paymentMethod.value, paymentDate.value)
           e.preventDefault();
           createBilling({
             variables: {
@@ -68,9 +69,9 @@ const AddBilling = () => {
               serviceType: serviceType.value,
               serviceProvider: serviceProvider.value,
               serviceLocation: serviceLocation.value,
-              totalBillAmount: totalBillAmount.value,
-              insuranceBilledAmount: insuranceBilledAmount.value,
-              amountPaid: amountPaid.value,
+              totalBillAmount: parseInt(totalBillAmount.value),
+              insuranceBilledAmount: parseInt(insuranceBilledAmount.value),
+              amountPaid: parseInt(amountPaid.value),
               paymentMethod: paymentMethod.value,
               paymentDate: paymentDate.value
 
@@ -96,7 +97,7 @@ const AddBilling = () => {
             type="date"
             name="date"
             ref={(node) => {
-              Date = node;
+              date = node;
             }}
             placeholder="Enter the date:"
           />
