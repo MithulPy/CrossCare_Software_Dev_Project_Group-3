@@ -1,147 +1,42 @@
 .incident-list-container {
-    padding: 20px;
-  }
-  
-  .incident-list-container h2 {
-    margin-top: 0;
-  }
-  
-  .incident-list-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .incident-list-table th,
-  .incident-list-table td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .incident-list-table th {
-    background-color: #0077ff;
-    color: white;
-    font-weight: bold;
-  }
-  
-  .incident-list-table tbody tr:hover {
-    background-color: #f5f5f5;
-  }
-  
-  .view-details-button {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0077ff;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-  
-  @media only screen and (min-width: 768px) {
-    .incident-list-table {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-  }
-  
-  .view-details-button {
-    background-color: #4caf50;
-    border: none;
-    color: white;
-    padding: 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  .view-details-button:hover {
-    background-color: #3e8e41;
-  }
-  
-  .close-details-button {
-    background-color: #f44336;
-    border: none;
-    color: white;
-    padding: 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 16px;
-  }
-  
-  .close-details-button:hover {
-    background-color: #d32f2f;
-  }
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 1000px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
 
-  .create-incident-button {
-    background-color: #0077ff;
-    border: none;
-    color: white;
-    padding: 8px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    cursor: pointer;
-    border-radius: 4px;
-    margin-top: 16px;
-  }
-  
-  .create-incident-button:hover {
-    background-color: #422fd3;
-  }
-  
-  .incident-details-container {
-    margin-top: 32px;
-    padding: 16px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-  }
-  
-  .incident-details-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .incident-details-container h2 {
-    margin-top: 0;
-  }
-  
-  .incident-details-container p {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-  
-  .incident-details-container strong {
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  
-  .incident-details-container button {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: #0077ff;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-  }
-  
-  .incident-details-container button:hover {
-    background-color: #0066cc;
-  }
-  
+.incident-list-container h2 {
+  margin-bottom: 20px;
+}
+
+.incident-list-table {
+  width: 100%;
+}
+
+.incident-list-table th {
+  text-align: center;
+  font-size: 1.2rem;
+  background-color: #007bff;
+  color: #fff;
+}
+
+.incident-list-table td {
+  text-align: center;
+}
+
+.create-incident-button {
+  margin-top: 20px;
+}
+/* Make even rows have a gray background color */
+.table-striped tbody tr:nth-of-type(even) {
+  background-color: #f8f9fa;
+}
+
+/* Make odd rows have a white background color */
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: #ffffff;
+}
+thead {
+  background-color: #007bff;
+  color: white;
+}
