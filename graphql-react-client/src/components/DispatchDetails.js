@@ -3,6 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 
 const DispatchDetails = ({ ambulance, onClose }) => {
+  const isAvailable = ambulance.status === 'Available';
+
   return (
     <Modal show={true} onHide={onClose}>
       <Modal.Header closeButton>
@@ -14,6 +16,8 @@ const DispatchDetails = ({ ambulance, onClose }) => {
         <p>Location: {ambulance.location}</p>
         <p>Status: {ambulance.status}</p>
         <p>ETA: {ambulance.eta}</p>
+        {isAvailable && <p>Availability: Ambulance is available for dispatch</p>}
+        {!isAvailable && <p>Availability: Ambulance is not available for dispatch</p>}
         <p>Dispatch Details:</p>
         <ul>
           <li>Time: 10:00am</li>
