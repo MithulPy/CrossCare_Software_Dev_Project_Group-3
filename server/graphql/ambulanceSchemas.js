@@ -27,7 +27,7 @@ const ambulanceType = new GraphQLObjectType({
     crewMembers: { type: GraphQLString },
     location: { type: GraphQLString },
     status: { type: GraphQLString },
-    eta: { type: GraphQLString }
+    eta: { type: GraphQLInt }
   })
 });
 
@@ -86,7 +86,7 @@ const mutation = new GraphQLObjectType({
           crewMembers: { type: new GraphQLNonNull(GraphQLString) },
           location: { type: new GraphQLNonNull(GraphQLString) },
           status: { type: new GraphQLNonNull(GraphQLString) },
-          eta: { type: new GraphQLNonNull(GraphQLString) }
+          eta: { type: new GraphQLNonNull(GraphQLInt) }
         },
         resolve: function (root, params) {
           const ambulanceModel = new AmbulanceModel(params);
@@ -105,7 +105,7 @@ const mutation = new GraphQLObjectType({
           crewMembers: { type: GraphQLString },
           location: { type: GraphQLString },
           status: { type: GraphQLString },
-          eta: { type: GraphQLString }
+          eta: { type: GraphQLInt }
         },
         resolve: function (root, params) {
           return AmbulanceModel.findByIdAndUpdate(

@@ -47,6 +47,9 @@ import AddBilling from './components/AddBilling';
 import ViewBillingInfo from './components/ViewBillingInfo';
 import AddIncidentReport from './components/AddIncidentReport';
 import IncidentApprovalReject from './components/IncidentApprovalReject';
+
+import AmbulanceList2 from './components/AmbulanceList2';
+
 //
 function App() {
 const [color,changeColor] =useState("#FFDAB9");
@@ -70,7 +73,8 @@ const [color,changeColor] =useState("#FFDAB9");
               <Nav.Link as={Link} to="/patientrecords">
                 Patient Records
               </Nav.Link>
-              <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
+              <Nav.Link as={Link} to="/ambulancelist">List</Nav.Link>
+              <Nav.Link as={Link} to="/ambulancelist2">Ambulance List</Nav.Link>
               <Nav.Link as={Link} to="/incidentlist">Incident List</Nav.Link>
 
 
@@ -113,6 +117,9 @@ const [color,changeColor] =useState("#FFDAB9");
           <Route path = "addstudent" element={<AddStudent />} />
           <Route path = "editstudent" element={<EditStudent />} />
           <Route path = "deletestudent" element={<DeleteStudent />} />
+
+          <Route path = "ambulancelist2" element={<AmbulanceList2 />} />
+
 
 
               {/*PATIENT DETAILS*/ }

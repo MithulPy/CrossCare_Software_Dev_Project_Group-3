@@ -14,7 +14,7 @@ const ADD_AMBULANCE = gql`
     $crewMembers: String!,
     $location: String!,
     $status: String!,
-    $eta: String!
+    $eta: Int!
   ) {
     addAmbulance(
       crewMembers: $crewMembers,
@@ -32,6 +32,14 @@ const AddAmbulance = () => {
   
     let id, crewMembers, location, status, eta;
     const [addAmbulance, { data, loading, error }] = useMutation(ADD_AMBULANCE);
+
+    const locationList = [
+      { name: "Lawrence and Markham, Scarborough", eta: 20 },
+      { name: "Finch East, Markham", eta: 45 },
+      { name: "Progress Avenue, Scarborough", eta: 1 },
+      { name: " Elsmere and Markham, Scarborough", eta: 10 },
+    ];
+    
   
     if (loading) return 'Submitting...';
     if (error) return `Submission error! ${error.message}`;
@@ -41,20 +49,34 @@ const AddAmbulance = () => {
         <form
           onSubmit={(e) => {
             e.preventDefault();
+          
+            if (!crewMembers.value || !location.value || !status.value || !eta.value) {
+              alert('Please fill in all fields');
+              return;
+            }
+          
+            const etaNum = parseInt(eta.value);
+            if (isNaN(etaNum)) {
+              alert('Please enter a valid number for ETA');
+              return;
+            }
+          
             addAmbulance({
               variables: {
                 crewMembers: crewMembers.value,
                 location: location.value,
                 status: status.value,
-                eta: eta.value,
+                eta: etaNum,
               },
             });
+          
             crewMembers.value = '';
             location.value = '';
             status.value = '';
             eta.value = '';
-            navigate('/ambulancelist');
+            navigate('/ambulancelist2');
           }}
+          
         >
           
   
@@ -69,14 +91,22 @@ const AddAmbulance = () => {
           </Form.Group>
   
           <Form.Group>
-            <Form.Label>Location:</Form.Label>
-            <Form.Control
-              type="text"
-              name="location"
-              ref={node => {location = node; }}
-              placeholder="Location"
-            />
-          </Form.Group>
+  <Form.Label>Location:</Form.Label>
+  <Form.Control
+    as="select"
+    name="location"
+    ref={node => {location = node; }}
+    onChange={(e) => {
+      const selectedLocation = locationList.find(l => l.name === e.target.value);
+      eta.value = selectedLocation ? selectedLocation.eta : '';
+    }}
+  >
+    <option value="">Select a location</option>
+    {locationList.map((l, i) => (
+      <option key={i} value={l.name}>{l.name}</option>
+    ))}
+  </Form.Control>
+</Form.Group>
   
           <Form.Group>
   <Form.Label>Status:</Form.Label>
@@ -84,6 +114,7 @@ const AddAmbulance = () => {
     <option value="Available">Available</option>
     <option value="On-Route">On-Route</option>
     <option value="Unavailable">Unavailable</option>
+    
   </Form.Select>
 </Form.Group>
 
@@ -91,7 +122,7 @@ const AddAmbulance = () => {
           <Form.Group>
             <Form.Label>ETA:</Form.Label>
             <Form.Control
-              type="text"
+              type="number"
               name="eta"
               ref={node => {eta = node; }}
               placeholder="ETA"
@@ -102,7 +133,7 @@ const AddAmbulance = () => {
             Add Ambulance
           </Button>
 
-          <Button variant="danger" onClick={() => navigate('/ambulancelist')}>
+          <Button variant="danger" onClick={() => navigate('/ambulancelist2')}>
             Cancel
           </Button>
 

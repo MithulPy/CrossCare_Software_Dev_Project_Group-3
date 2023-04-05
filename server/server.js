@@ -17,6 +17,7 @@ const userSchema = require('./graphql/userSchemas');
 const ambulanceSchema = require('./graphql/ambulanceSchemas');
 const patientSchema = require('./graphql/PatientSchemas');
 
+
 const mergedSchema = stitchSchemas({
   subschemas: [userSchema, ambulanceSchema, patientSchema,ambulanceRequestSchema,incidentSchema],
 });
