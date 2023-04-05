@@ -42,6 +42,7 @@ import EditPatient from './components/EditPatient';
 import Home from './components/Home';
 import DispatchSuccess from './components/DispatchSuccess';
 import AddBilling from './components/AddBilling';
+import ViewBillingInfo from './components/ViewBillingInfo';
 
 //
 function App() {
@@ -75,7 +76,7 @@ const [color,changeColor] =useState("#FFDAB9");
 
               <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
               {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
-
+              <Nav.Link as={Link} to="/patientlist">Patient List</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -109,7 +110,7 @@ const [color,changeColor] =useState("#FFDAB9");
           <Route path="editpatient/:patientId" element={<EditPatient />} />
           <Route path = "patientlist" element={<PatientList />} />
           <Route path="addbilling/:patientId" element={<AddBilling />} />
-          <Route path="viewbilling/:billingId" element={<AddBilling />} />
+          <Route path="viewbilling/:billingId" element={<ViewBillingInfo />} />
         </Routes>
     </div>
       

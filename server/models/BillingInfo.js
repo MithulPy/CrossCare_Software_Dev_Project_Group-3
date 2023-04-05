@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 // Define a new 'StudentSchema'
 const BillingSchema = new Schema({
+id:String,
 patientId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Patient',

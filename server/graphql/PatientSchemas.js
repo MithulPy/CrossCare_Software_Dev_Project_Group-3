@@ -135,6 +135,24 @@ const patientType = new GraphQLObjectType({
             return billings
           }
         },
+
+        billing: {
+          type: billingType,
+          args: {
+            id: {
+              name: '_id',
+              type: GraphQLString
+            }
+          },
+          resolve: function (root, params) {
+            const billingInfo = BillingInfo.findById(params.id).exec()
+            if (!billingInfo) {
+              console.log('Hi')
+              throw new Error('Error')
+            }
+            return billingInfo
+          }
+        },
       }
     }
   });
