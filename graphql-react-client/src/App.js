@@ -78,7 +78,8 @@ const [color,changeColor] =useState("#FFDAB9");
               {/* <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
               <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link> */}
 
-              <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
+              
+              {/*<Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>*/}
               {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
               <Nav.Link as={Link} to="/patientlist">Patient List</Nav.Link>
             </Nav>
