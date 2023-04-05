@@ -1,0 +1,74 @@
+.create-incident-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .create-incident-container h2 {
+    margin-top: 0;
+  }
+  
+  .create-incident-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .create-incident-container .input-container {
+    display: flex;
+    margin-bottom: 20px;
+  }
+  
+  .create-incident-container label {
+    width: 120px;
+    margin-right: 20px;
+    font-weight: bold;
+  }
+  
+  .create-incident-container input {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .create-incident-container button {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #0077ff;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  
+  .create-incident-container button:hover {
+    background-color: #0066cc;
+  }
+  
+  @media only screen and (min-width: 768px) {
+    .create-incident-container {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  
+    .create-incident-container form {
+      width: 100%;
+    }
+  
+    .create-incident-container .input-container {
+        display: flex;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+      }
+      
+  
+    .create-incident-container button {
+      width: 100%;
+      margin-top: 30px;
+    }
+  }
+  
