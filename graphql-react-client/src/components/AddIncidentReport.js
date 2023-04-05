@@ -68,7 +68,7 @@ const AddIncidentReport = () => {
                     date.value = '';
                     medium.value = '';
                     reporter.value = '';
-                    navigate('/reportapproval')                    } 
+                    navigate('/incidentreportapproval')                    } 
                 }
             >
                     <Form.Group>

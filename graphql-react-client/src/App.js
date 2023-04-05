@@ -46,6 +46,7 @@ import CreateIncident from './components/CreateIncident';
 import AddBilling from './components/AddBilling';
 import ViewBillingInfo from './components/ViewBillingInfo';
 import AddIncidentReport from './components/AddIncidentReport';
+import IncidentApprovalReject from './components/IncidentApprovalReject';
 //
 function App() {
 const [color,changeColor] =useState("#FFDAB9");
@@ -106,7 +107,7 @@ const [color,changeColor] =useState("#FFDAB9");
         <Route exact path="/dispatchsuccess" element={<DispatchSuccess/>} />
         <Route path = "incidentlist" element={<IncidentList />} />
         <Route path = "createincident" element={<AddIncidentReport />} />
-
+        <Route path = "incidentreportapproval" element={<IncidentApprovalReject />} />
 
           <Route path = "studentlist" element={<StudentList />} />
           <Route path = "addstudent" element={<AddStudent />} />
@@ -120,6 +121,7 @@ const [color,changeColor] =useState("#FFDAB9");
           <Route path = "patientlist" element={<PatientList />} />
           <Route path="addbilling/:patientId" element={<AddBilling />} />
           <Route path="viewbilling/:billingId" element={<ViewBillingInfo />} />
+          
         </Routes>
     </div>
       

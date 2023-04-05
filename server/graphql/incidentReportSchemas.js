@@ -118,6 +118,26 @@ const incidentType = new GraphQLObjectType({
             return newIncident
           }
         },
+
+        updateIncidentStatus: {
+            type: incidentType,
+            args: {
+              id: { type: GraphQLNonNull(GraphQLString) },
+              status: { type: GraphQLNonNull(GraphQLString) },
+            },
+            async resolve(parent, args) {
+              try {
+                const updatedIncident = await IncidentModal.findByIdAndUpdate(
+                  args.id,
+                  { status: args.status },
+                  { new: true }
+                );
+                return updatedIncident;
+              } catch (err) {
+                throw new Error(err.message);
+              }
+            },
+        },
       }
     }
   });
