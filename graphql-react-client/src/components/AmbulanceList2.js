@@ -17,16 +17,8 @@ const GET_AMBULANCES = gql`
     }
   }
 `;
-
-const DELETE_AMBULANCE = gql`
-  mutation deleteAmbulance($id: ID!) {
-    deleteAmbulance(id: $id)
-  }
-`;
-
 const AmbulanceList2 = () => {
   const { loading, error, data, refetch } = useQuery(GET_AMBULANCES);
-  const [deleteAmbulance] = useMutation(DELETE_AMBULANCE);
   const statusOptions = ["Available", "Unavailable", "En Route"];
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
@@ -41,31 +33,46 @@ const AmbulanceList2 = () => {
     // Update the status of the ambulance to "En Route"
     ambulance.status = "En Route";
   
+    // Store the dispatch time and ETA in localStorage
+    localStorage.setItem(`dispatch_${ambulance._id}`, JSON.stringify({timestamp, eta: ambulance.eta}));
+  
     setDispatchedAmbulances([...dispatchedAmbulances, { ...ambulance, timestamp }]);
   
-    setTimeout(() => {
-      setDispatchedAmbulances(
-        dispatchedAmbulances.filter((dispatched) => dispatched._id !== ambulance._id)
-      );
-      // Update the status of the ambulance to "Reached Destination"
-      ambulance.status = "Reached Destination";
-      setNotificationMessage(`Ambulance ${ambulance._id} has reached its destination!`);
-      setShowNotification(true);
-    }, ambulance.eta * 60 * 1000); // convert ETA to milliseconds
+    // Update the remaining time of each dispatched ambulance every second
+    const intervalId = setInterval(() => {
+      const dispatched = dispatchedAmbulances.find((dispatched) => dispatched._id === ambulance._id);
+      if (!dispatched) {
+        clearInterval(intervalId);
+        return;
+      }
+  
+      const dispatchInfo = JSON.parse(localStorage.getItem(`dispatch_${ambulance._id}`));
+      const remainingTime = Math.max(
+        (dispatchInfo.eta * 60 - (Date.now() - Date.parse(dispatchInfo.timestamp)) / 1000) / 60,
+        0
+      ).toFixed(0);
+  
+      // Update the dispatch status and remaining time in localStorage
+      localStorage.setItem(`dispatch_${ambulance._id}`, JSON.stringify({timestamp: dispatchInfo.timestamp, eta: dispatchInfo.eta, remainingTime}));
+  
+      if (remainingTime === 0) {
+        clearInterval(intervalId);
+        setDispatchedAmbulances(
+          dispatchedAmbulances.filter((dispatched) => dispatched._id !== ambulance._id)
+        );
+        // Update the status of the ambulance to "Reached Destination"
+        ambulance.status = "Reached Destination";
+        setNotificationMessage(`Ambulance ${ambulance._id} has reached its destination!`);
+        setShowNotification(true);
+        localStorage.removeItem(`dispatch_${ambulance._id}`);
+      }
+    }, 1000);
+  
     setNotificationMessage(`Ambulance ${ambulance._id} has been dispatched!`);
     setShowNotification(true);
   };
   
   
-
-  const handleDelete = async (id) => {
-    await deleteAmbulance({
-      variables: {
-        id: id,
-      },
-      refetchQueries: [{ query: GET_AMBULANCES }],
-    });
-  };
 
   const handleTrack = (ambulance) => {
     setSelectedAmbulance(ambulance);
@@ -100,42 +107,60 @@ const AmbulanceList2 = () => {
                 <tr>
                   <td>{ambulance._id}</td>
                   <td>{ambulance.crewMembers}</td>
-                  <td>{ambulance.location}</td>
                   <td>
-                    {dispatched ? (
-                      ambulance.status === "Reached Destination" ? "Reached Destination" : "En Route" // Display "Reached Destination" if ambulance has reached its destination
-                    ) : (
-                      ambulance.status
-                    )}
-                  </td>
-                  <td>
-                    {dispatched ? (
-                      <span>{ambulance.eta} minutes</span>
-                    ) : (
-                      <span>{ambulance.eta} minutes</span>
-                    )}
-                  </td>
-                  <td>
-                    <Button variant="danger" size="sm" onClick={() => handleDelete(ambulance._id)}>
-                      Delete
-                    </Button>
-                    <Button
-                      variant="success"
-                      size="sm"
-                      className="ml-2"
-                      onClick={() =>
-                        handleDispatch({
-                          ...ambulance,
-                          dispatchedAt: new Date().toISOString(),
-                        })
-                      }
-                    >
-                      Dispatch
-                    </Button>
+                  {ambulance.status === "Unavailable" ? (
+                    "Off-Duty"
+                  ) : (
+                    ambulance.location
+                  )}
+                </td>
+                  <td style={{color:
+  ambulance.status === "Available" ? "green" :
+  ambulance.status === "On-Route" ? "blue" :
+  ambulance.status === "Unavailable" ? "red" :
+  dispatched && ambulance.status !== "Reached Destination" ? "orange" :
+  "black"}}>
+  {dispatched ? (
+    ambulance.status === "Reached Destination" ? "Reached Destination" : "En Route" // Display "Reached Destination" if ambulance has reached its destination
+  ) : (
+    ambulance.status
+  )}
+</td>
 
-                    <Button variant="info" size="sm" onClick={() => alert(`Details on ambulance ${ambulance._id}\n\nCrew Members: ${ambulance.crewMembers}\nLocation: ${ambulance.location}\nStatus: ${ambulance.status}\nETA: ${ambulance.eta} minutes`)} >
-                      Track
-                    </Button>
+                  <td>
+                    {dispatched ? (
+                      <span>{ambulance.eta} minutes</span>
+                    ) : (
+                      <span>{ambulance.eta} minutes</span>
+                    )}
+                  </td>
+                  <td>
+                    
+
+                  <Button
+  variant="success"
+  size="sm"
+  className="mx-2"
+  onClick={() =>
+    handleDispatch({
+      ...ambulance,
+      dispatchedAt: new Date().toISOString(),
+    })
+  }
+  disabled={ambulance.status === "Unavailable"}
+>
+  Dispatch
+</Button>
+
+                    <Button
+  variant="info"
+  size="sm"
+  onClick={() => handleTrack(ambulance)}
+>
+  Track
+</Button>
+
+                   
                   </td>
                 </tr>
               </React.Fragment>
@@ -143,13 +168,13 @@ const AmbulanceList2 = () => {
           })}
         </tbody>
       </Table>
-      <div className="center">
+      <div className="d-flex justify-content-center">
         <Button variant="success" size="sm" onClick={() => refetch()}>
           Refresh
         </Button>
   
         <Link to="/addambulance">
-          <Button variant="primary" size="sm" className="ml-2">
+          <Button variant="primary" size="sm" className="mx-2">
             Add Ambulance
           </Button>
         </Link>
@@ -160,6 +185,18 @@ const AmbulanceList2 = () => {
         </Modal.Header>
         <Modal.Body>{notificationMessage}</Modal.Body>
       </Modal>
+      <Modal show={showDetails} onHide={() => setShowDetails(false)}>
+      <Modal.Header closeButton>
+        <Modal.Title>Ambulance Details</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <p>ID: {selectedAmbulance && selectedAmbulance._id}</p>
+        <p>Crew Members: {selectedAmbulance && selectedAmbulance.crewMembers}</p>
+        <p>Location: {selectedAmbulance && selectedAmbulance.location}</p>
+        <p>Status: {selectedAmbulance && selectedAmbulance.status}</p>
+        <p>ETA: {selectedAmbulance && selectedAmbulance.eta} minutes</p>
+      </Modal.Body>
+    </Modal>
     </div>
   );
         };
