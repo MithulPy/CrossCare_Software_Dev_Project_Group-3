@@ -45,6 +45,7 @@ import IncidentList from './components/IncidentList';
 import CreateIncident from './components/CreateIncident';
 import AddBilling from './components/AddBilling';
 import ViewBillingInfo from './components/ViewBillingInfo';
+import AddIncidentReport from './components/AddIncidentReport';
 //
 function App() {
 const [color,changeColor] =useState("#FFDAB9");
@@ -104,7 +105,7 @@ const [color,changeColor] =useState("#FFDAB9");
         <Route exact path="/dispatchdetails" element={<DispatchDetails/>} />
         <Route exact path="/dispatchsuccess" element={<DispatchSuccess/>} />
         <Route path = "incidentlist" element={<IncidentList />} />
-        <Route path = "createincident" element={<CreateIncident />} />
+        <Route path = "createincident" element={<AddIncidentReport />} />
 
 
           <Route path = "studentlist" element={<StudentList />} />

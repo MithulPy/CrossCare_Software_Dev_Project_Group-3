@@ -11,12 +11,14 @@ const { graphqlHTTP } = require('express-graphql');
 
 var ambulanceRequestSchema = require('./graphql/ambulanceRequestSchemas');
 
+var incidentSchema = require('./graphql/incidentReportSchemas');
+
 const userSchema = require('./graphql/userSchemas');
 const ambulanceSchema = require('./graphql/ambulanceSchemas');
 const patientSchema = require('./graphql/PatientSchemas');
 
 const mergedSchema = stitchSchemas({
-  subschemas: [userSchema, ambulanceSchema, patientSchema,ambulanceRequestSchema],
+  subschemas: [userSchema, ambulanceSchema, patientSchema,ambulanceRequestSchema,incidentSchema],
 });
 
 

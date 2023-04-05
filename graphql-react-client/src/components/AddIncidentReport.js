@@ -12,17 +12,17 @@ import "./entryform.css"
 //
 //
 const ADD_REPORT = gql`
-    mutation addReport(
+    mutation addIncident(
         $issue: String!,
         $casenumber: String!,
-        $date:String! ,
+        $date:Date! ,
         $medium:String!,
         $reporter:String! ,
         $location:String! ,
         $status:String!      
         
         ) {
-        addReport(
+        addIncident(
             issue:$issue,
             casenumber:$casenumber,
             date:$date,
@@ -36,12 +36,12 @@ const ADD_REPORT = gql`
     }
 `;
 //function component to add a student
-const AddReport = () => {
+const AddIncidentReport = () => {
     //
     let navigate = useNavigate()
     //
     let  casenumber,issue,date,medium,reporter,location,status;
-    const [addReport, { data, loading, error }] = useMutation(ADD_REPORT);
+    const [addIncident, { data, loading, error }] = useMutation(ADD_REPORT);
 
     if (loading) return 'Submitting...';
     if (error) return `Submission error! ${error.message}`;
@@ -52,7 +52,7 @@ const AddReport = () => {
             <form
                 onSubmit={ e => {    
                     e.preventDefault();
-                    addReport( { variables: { 
+                    addIncident( { variables: { 
                         location:location.value, 
                         casenumber: casenumber.value,
                         issue: issue.value, 
@@ -86,7 +86,7 @@ const AddReport = () => {
                     <Form.Group>
                         <Form.Label>Description of incident:</Form.Label>
                     <Form.Control as="textarea" name="issue" rows={2} ref={node => { issue = node; }}
-                    placeholder="describe" className="form-control"/>
+                    placeholder="Enter the description" className="form-control"/>
                 </Form.Group>  
 
                 <Form.Group>
@@ -96,7 +96,12 @@ const AddReport = () => {
 
                 <Form.Group>
                 <Form.Label>Medium:</Form.Label>
-                  <Form.Control type="text" name="medium" ref={node => { medium = node; }} className="form-control"/>
+                <Form.Control as="select" name="medium" ref={(node) => {   medium = node; }} >
+                <option>Choose...</option>
+                <option>Email</option>
+                <option>Written-complaint</option>
+                <option>Phone</option>
+            </Form.Control>
                     </Form.Group>
                     
                     <Form.Group>
@@ -104,8 +109,8 @@ const AddReport = () => {
                   <Form.Control type="text" name="reporter" ref={node => { reporter= node; }} className="form-control"/>
                 </Form.Group>
                                          
-
-                <Button variant="primary" type="submit" className="btn btn-primary">Submit</Button>
+                <br/>
+                <Button variant="primary" type="submit" className="btn btn-primary">Submit</Button><span> </span><span>  </span>
                 <Button variant="secondary" type="button" className="btn btn-secondary" aria-label="Cancel">Cancel</Button>
 
                 </form>
@@ -114,4 +119,4 @@ const AddReport = () => {
     );
 }
 
-export default AddReport
+export default AddIncidentReport
