@@ -42,9 +42,6 @@ import EditPatient from './components/EditPatient';
 import Home from './components/Home';
 import DispatchSuccess from './components/DispatchSuccess';
 import IncidentList from './components/IncidentList';
-import CreateIncident from './components/CreateIncident';
-import AddBilling from './components/AddBilling';
-import ViewBillingInfo from './components/ViewBillingInfo';
 //
 function App() {
 const [color,changeColor] =useState("#FFDAB9");
@@ -69,9 +66,13 @@ const [color,changeColor] =useState("#FFDAB9");
                 Patient Records
               </Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist">Ambulance List</Nav.Link>
+<<<<<<< HEAD
               <Nav.Link as={Link} to="/incidentlist">Incident List</Nav.Link>
 
 
+            </Nav>
+=======
+>>>>>>> 873521074499d98cf9666596119cd9d17622100e
 
             
 
@@ -80,7 +81,7 @@ const [color,changeColor] =useState("#FFDAB9");
 
               <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
               {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
-              <Nav.Link as={Link} to="/patientlist">Patient List</Nav.Link>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -103,7 +104,6 @@ const [color,changeColor] =useState("#FFDAB9");
         <Route exact path="/dispatchdetails" element={<DispatchDetails/>} />
         <Route exact path="/dispatchsuccess" element={<DispatchSuccess/>} />
         <Route path = "incidentlist" element={<IncidentList />} />
-        <Route path = "createincident" element={<CreateIncident />} />
 
 
           <Route path = "studentlist" element={<StudentList />} />
@@ -114,10 +114,8 @@ const [color,changeColor] =useState("#FFDAB9");
 
               {/*PATIENT DETAILS*/ }
           <Route path="addPatient" element={<AddPatient/>}/>
-          <Route path="editpatient/:patientId" element={<EditPatient />} />
+          <Route path="editPatient" element={<EditPatient/>}/>
           <Route path = "patientlist" element={<PatientList />} />
-          <Route path="addbilling/:patientId" element={<AddBilling />} />
-          <Route path="viewbilling/:billingId" element={<ViewBillingInfo />} />
         </Routes>
     </div>
       

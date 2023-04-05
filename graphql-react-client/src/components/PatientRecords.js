@@ -16,6 +16,8 @@ const appointments = [
     date: '2023-03-21',
     doctor: 'Dr.Jonathan Cherian',
     department: 'Department 1',
+    diagnosis: 'Fever',
+    treatmentPlan: 'Rest and hydration',
   },
   {
     id: 2,
@@ -24,6 +26,8 @@ const appointments = [
     date: '2023-03-22',
     doctor: 'Dr.Phillip Matthew',
     department: 'Department 2',
+    diagnosis: 'Sprained ankle',
+    treatmentPlan: 'Ice and rest',
   },
   {
     id: 3,
@@ -32,6 +36,8 @@ const appointments = [
     date: '2023-03-23',
     doctor: 'Dr.Grace Chacko',
     department: 'Department 3',
+    diagnosis: 'High blood pressure',
+    treatmentPlan: 'Medication and lifestyle changes',
   },
   {
     id: 4,
@@ -40,6 +46,8 @@ const appointments = [
     date: '2021-05-22',
     doctor: 'Dr.Pillai',
     department: 'Department 2',
+    diagnosis: 'Migraine',
+    treatmentPlan: 'Painkillers and rest',
   },
   {
     id: 5,
@@ -48,6 +56,8 @@ const appointments = [
     date: '2022-05-23',
     doctor: 'Dr.Martin',
     department: 'Department 3',
+    diagnosis: 'Common cold',
+    treatmentPlan: 'Rest and hydration',
   },
 ];
 
@@ -82,56 +92,55 @@ const PatientRecords = () => {
                   <Form.Control as="select" value={selectedDepartment} onChange={handleDepartmentSelect}>
                     <option value="">All Departments</option>
                     {departments.map((department) => (
-                      <option key={department.id} value={department.name}>
-                        {department.name}
-                      </option>
-                    ))}
-                  </Form.Control>
-                </Form.Group>
-                <Form.Group>
-                  <Form.Label>Date Range</Form.Label>
-                  <Form.Control type="date" />
-                  <Form.Control type="date" />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                  Apply Filters
-                </Button>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col md={8}>
-          <Card>
-            <Card.Header>Patient Records</Card.Header>
-            <ListGroup variant="flush">
-              {filteredPatients.length === 0 ? (
-                <ListGroup.Item>No results found.</ListGroup.Item>
-              ) : (
-                filteredPatients.map((appointment) => (
-                  <ListGroup.Item key={appointment.id}>
-                    <Row>
-                      <Col xs={2}>{appointment.patientId}</Col>
-                      <Col xs={3}>{appointment.patientName}</Col>
-                      <Col xs={2}>{appointment.date}</Col>
-                      <Col xs={3}>{appointment.doctor}</Col>
-                      <Col xs={2}>
-                        <Link to={`/view-patient/${appointment.patientId}`}>
-                          <Button variant="primary" size="sm" className="ml-2">View</Button>
-                        </Link>
-                      </Col>
-                    </Row>
-                  </ListGroup.Item>
-                ))
-                
-                
-              )}
-            </ListGroup>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
-    </div>
-  );
+              <option key={department.id} value={department.name}>
+              {department.name}
+            </option>
+          ))}
+            </Form.Control>
+          </Form.Group>
+          <Form.Group>
+            <Form.Label>Date Range</Form.Label>
+            <Form.Control type="date" />
+            <Form.Control type="date" />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Apply Filters
+          </Button>
+        </Form>
+      </Card.Body>
+    </Card>
+  </Col>
+  <Col md={8}>
+    <Card>
+      <Card.Header>Patient Records</Card.Header>
+      <ListGroup variant="flush">
+        {filteredPatients.length === 0 ? (
+          <ListGroup.Item>No results found.</ListGroup.Item>
+        ) : (
+          filteredPatients.map((appointment) => (
+            <ListGroup.Item key={appointment.id}>
+              <Row>
+                <Col xs={2}>{appointment.patientId}</Col>
+                <Col xs={3}>{appointment.patientName}</Col>
+                <Col xs={2}>{appointment.date}</Col>
+                <Col xs={3}>{appointment.doctor}</Col>
+                <Col xs={2}>
+                  <Link to={`/view-patient/${appointment.patientId}`}>
+                    <Button variant="primary" size="sm" className="ml-2">View</Button>
+                  </Link>
+                </Col>
+              </Row>
+
+            </ListGroup.Item>
+          ))
+        )}
+      </ListGroup>
+    </Card>
+  </Col>
+</Row>
+</Container>
+</div>
+);
 };
 
 export default PatientRecords;
