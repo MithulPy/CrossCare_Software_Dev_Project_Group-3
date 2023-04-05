@@ -73,7 +73,6 @@ const [color,changeColor] =useState("#FFDAB9");
               <Nav.Link as={Link} to="/patientrecords">
                 Patient Records
               </Nav.Link>
-              <Nav.Link as={Link} to="/ambulancelist">List</Nav.Link>
               <Nav.Link as={Link} to="/ambulancelist2">Ambulance List</Nav.Link>
               <Nav.Link as={Link} to="/incidentlist">Incident List</Nav.Link>
 
