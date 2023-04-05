@@ -67,6 +67,7 @@ const GET_BILLINGS = gql`
 const PatientList = () => {
 
     const navigate = useNavigate()
+    var billingId = "" ;
     const { loading, error, data , refetch } = useQuery(GET_PATIENTS);
     const [deletePatient] = useMutation(DELETE_PATIENT);
     const { loading: billingLoading, error: billingError, data: billingData } = useQuery(GET_BILLINGS);
@@ -80,8 +81,8 @@ const PatientList = () => {
       navigate(`/addbilling/${patientId}`);
     };
   
-    const handleViewBilling = (patientId) => {
-      navigate(`/viewbilling/${patientId}`);
+    const handleViewBilling = (billingId) => {
+      navigate(`/viewbilling/${billingId}`);
     };
 
     return (
@@ -100,6 +101,7 @@ const PatientList = () => {
                 {data.patients.map((patient) => {
             const billingExists = billingData?.billings?.some((billing) => {
               console.log(billing.patient._id, patient._id);
+              billingId = billing._id;
             return billing.patient._id === patient._id});
             return (
               <tr key={patient._id}>
@@ -125,7 +127,7 @@ const PatientList = () => {
                       <button
                         type="button"
                         className="btn btn-primary"
-                        onClick={() => handleViewBilling(patient._id)}
+                        onClick={() => handleViewBilling(billingId)}
                       >
                         View Billing Details
                       </button>

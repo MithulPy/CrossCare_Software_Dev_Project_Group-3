@@ -109,6 +109,7 @@ const [color,changeColor] =useState("#FFDAB9");
           <Route path="editpatient/:patientId" element={<EditPatient />} />
           <Route path = "patientlist" element={<PatientList />} />
           <Route path="addbilling/:patientId" element={<AddBilling />} />
+          <Route path="viewbilling/:billingId" element={<AddBilling />} />
         </Routes>
     </div>
       
