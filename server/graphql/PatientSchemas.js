@@ -124,15 +124,17 @@ const patientType = new GraphQLObjectType({
             return patientInfo
           }
         },
-        billingByPatientId : {
-          type: billingType,
-          args: {
-            patientId: { type: GraphQLID }
-          },
-          resolve(parent, args) {
-            return BillingInfo.find({ patientId: args.patientId });
+        billings: {
+          type: new GraphQLList(billingType),
+          resolve: function () {
+            const billings = BillingInfo.find().exec()
+            console.log(billings)
+            if (!billings) {
+              throw new Error('Error')
+            }
+            return billings
           }
-        }
+        },
       }
     }
   });

@@ -36,18 +36,56 @@ const DELETE_PATIENT = gql`
     }
   }
 `;
+
+const GET_BILLINGS = gql`
+  {
+    billings {
+      _id
+      patient {
+        _id
+        firstName
+        lastName
+        age
+        diagonosis
+        notes
+        hcnNo
+      }
+      date
+      time
+      serviceType
+      serviceProvider
+      serviceLocation
+      totalBillAmount
+      insuranceBilledAmount
+      amountPaid
+      paymentMethod
+      paymentDate
+    }
+  }
+`;
 //
 const PatientList = () => {
 
     const navigate = useNavigate()
     const { loading, error, data , refetch } = useQuery(GET_PATIENTS);
     const [deletePatient] = useMutation(DELETE_PATIENT);
+    const { loading: billingLoading, error: billingError, data: billingData } = useQuery(GET_BILLINGS);
+    if (loading || billingLoading ) {
+     // console.log(billingData.billing)
+      return <p>Loading...</p>;
+    }
+    if (error || billingError) return <p>Error :(</p>;
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
+    const handleAddBilling = (patientId) => {
+      navigate(`/addbilling/${patientId}`);
+    };
+  
+    const handleViewBilling = (patientId) => {
+      navigate(`/viewbilling/${patientId}`);
+    };
 
     return (
-
+        
         <div>
             
             <Table >
@@ -59,26 +97,52 @@ const PatientList = () => {
                         <th>Diagonosis</th>
 
                 </tr>
-                {data.patients.map((patient, index) => (
-                        <tr key={index}>
-                            <td>{patient.firstName}</td>
-                            <td>{patient.lastName}</td>
-                            <td>{patient.age}</td>
-                            <td>{patient.diagonosis}</td>
-                            <td>
-                            <form
-                                onSubmit={e => {
-                                                    e.preventDefault();
-                                                    deletePatient({ variables: { id: patient._id } });
-                                                    navigate("/patientlist")}
-                                               }>
-                                                <Link to={`/editpatient/${patient._id}`} className="btn btn-success">Update</Link>&nbsp;
-                                                <button type="submit" className="btn btn-danger">Remove</button>&nbsp;
-                                                <Link to={`/addbilling/${patient._id}`} className="btn btn-primary">Add Billing Details</Link>&nbsp;
-                            </form>
-                            </td>
-                        </tr>
-                ))}
+                {data.patients.map((patient) => {
+            const billingExists = billingData?.billings?.some((billing) => {
+              console.log(billing.patient._id, patient._id);
+            return billing.patient._id === patient._id});
+            return (
+              <tr key={patient._id}>
+                <td>{patient.firstName}</td>
+                <td>{patient.lastName}</td>
+                <td>{patient.age}</td>
+                <td>{patient.diagonosis}</td>
+                <td>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      deletePatient({ variables: { id: patient._id } });
+                      navigate("/patientlist");
+                    }}
+                  >
+                    <Link to={`/editpatient/${patient._id}`} className="btn btn-success">
+                      Update
+                    </Link><span>  </span><span>  </span>
+                    <button type="submit" className="btn btn-danger">
+                      Remove
+                    </button><span>   </span><span>  </span>
+                    {billingExists ? (
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={() => handleViewBilling(patient._id)}
+                      >
+                        View Billing Details
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        className="btn btn-primary"
+                        onClick={() => handleAddBilling(patient._id)}
+                      >
+                        Add Billing Details
+                      </button>
+                    )}
+                  </form>
+                </td>
+              </tr>
+            );
+          })}
              </tbody>
             </Table>
             
