@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@graphql-tools/stitch": "^8.7.44",
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
@@ -23,10 +24,12 @@
     "express-session": "^1.17.3",
     "graphql": "^15.8.0",
     "graphql-date": "^1.0.3",
+    "graphql-tools": "^8.3.19",
     "jsonwebtoken": "^9.0.0",
     "method-override": "^3.0.0",
     "mongoose": "^7.0.1",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.9.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.21"

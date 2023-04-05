@@ -43,6 +43,10 @@ import Home from './components/Home';
 import DispatchSuccess from './components/DispatchSuccess';
 import IncidentList from './components/IncidentList';
 import CreateIncident from './components/CreateIncident';
+import AddBilling from './components/AddBilling';
+import ViewBillingInfo from './components/ViewBillingInfo';
+import AddIncidentReport from './components/AddIncidentReport';
+import IncidentApprovalReject from './components/IncidentApprovalReject';
 //
 function App() {
 const [color,changeColor] =useState("#FFDAB9");
@@ -59,7 +63,7 @@ const [color,changeColor] =useState("#FFDAB9");
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
               <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
-              <Nav.Link as={Link} to="/createambulancerequest">Create Ambulance Request</Nav.Link>
+              {/*<Nav.Link as={Link} to="/createambulancerequest">Create Ambulance Request</Nav.Link>*/}
               {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
 
 
@@ -76,9 +80,10 @@ const [color,changeColor] =useState("#FFDAB9");
               {/* <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
               <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link> */}
 
-              <Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>
+              
+              {/*<Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>*/}
               {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
-
+              <Nav.Link as={Link} to="/patientlist">Patient List</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -101,8 +106,8 @@ const [color,changeColor] =useState("#FFDAB9");
         <Route exact path="/dispatchdetails" element={<DispatchDetails/>} />
         <Route exact path="/dispatchsuccess" element={<DispatchSuccess/>} />
         <Route path = "incidentlist" element={<IncidentList />} />
-        <Route path = "createincident" element={<CreateIncident />} />
-
+        <Route path = "createincident" element={<AddIncidentReport />} />
+        <Route path = "incidentreportapproval" element={<IncidentApprovalReject />} />
 
           <Route path = "studentlist" element={<StudentList />} />
           <Route path = "addstudent" element={<AddStudent />} />
@@ -112,8 +117,11 @@ const [color,changeColor] =useState("#FFDAB9");
 
               {/*PATIENT DETAILS*/ }
           <Route path="addPatient" element={<AddPatient/>}/>
-          <Route path="editPatient" element={<EditPatient/>}/>
+          <Route path="editpatient/:patientId" element={<EditPatient />} />
           <Route path = "patientlist" element={<PatientList />} />
+          <Route path="addbilling/:patientId" element={<AddBilling />} />
+          <Route path="viewbilling/:billingId" element={<ViewBillingInfo />} />
+          
         </Routes>
     </div>
       

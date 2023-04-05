@@ -3,17 +3,18 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 // Define a new 'StudentSchema'
-const PatientSchema = new Schema({
+const IncidentSchema = new Schema({
     id: String,
-    firstName: String,
-    lastName: String,
-    age: String,
-    diagonosis: String,
-    notes: String,
-    hcnNo: String
+    issue:String,
+    casenumber:String,
+    date:Date,
+    medium:String,
+    location:String,
+    reporter:String,
+    status:String
     
 	
 });
 
 // Create the 'Student' model out of the 'StudentSchema'
-module.exports = mongoose.model('Patient', PatientSchema);
+module.exports = mongoose.model('Incident', IncidentSchema);

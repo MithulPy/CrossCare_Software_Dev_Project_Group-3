@@ -1,8 +1,11 @@
 //View.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import AddPatient from './AddPatient';
 //
 import { useQuery, useMutation, gql } from '@apollo/client';
+import IncidentApprovalReject from './IncidentApprovalReject';
+import CreateAmbulanceRequest from './CreateAmbulanceRequest';
 // mutation to log the user out
 const LOG_OUT_MUTATION = gql`
   mutation LogOut {
@@ -24,6 +27,8 @@ function View (props) {
   const { screen, setScreen } = props;
   // return a stateful value and funcion to update it
   const [data, setData] = useState();
+  const [courseOperation, setCourseOperation] = useState('no-op');
+
   //
   const [logOut, { loading, error }] = useMutation(LOG_OUT_MUTATION);
   //
@@ -72,14 +77,32 @@ function View (props) {
   //
   return (
     <div className="App">
-                
-      <p>{screen}</p>
+      {
+        (() => {
+          switch (courseOperation) {
+            case 'addPatient':
+              return <AddPatient/>
+            case 'approvedenyincident':
+              return <IncidentApprovalReject />
+
+            case 'createambulancerequest':
+            return <CreateAmbulanceRequest/>
+            
+            default:
+              return <div>
+
+       <p>{screen}</p>
       <p>{data}</p>
-      <button onClick={verifyToken}>Verify Token</button>
-      
 
-      <button onClick={handleLogOut}>Log out</button>        
-
+      <button onClick={() => setCourseOperation('addPatient')}>Add Patient</button>
+      <button  className="mx-2" onClick={() => setCourseOperation('approvedenyincident')}>Approve or Deny Incident</button>
+      <button  className="mx-2" onClick={() => setCourseOperation('createambulancerequest')}>Create Ambulance Request</button>
+      <button  className="mx-2" onClick={handleLogOut}>Log out</button>   
+              </div>         
+           
+          }
+        })()
+      }
     </div>
   );
 }
