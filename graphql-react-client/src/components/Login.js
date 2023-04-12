@@ -2,9 +2,17 @@
 import React, { useState, useEffect } from 'react';
 //import ReactDOM from 'react-dom';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import {
+  Box,
+  CircularProgress,
+  Grid,
+  Button,
+  TextField,
+  Typography,
+} from '@mui/material';
 
 import "./entryform.css"
 //
@@ -63,32 +71,92 @@ function Login() {
 
     // Render the login form or the welcome message based on the value of 'screen'
     return (
-        <div className="entryform">
-            { screen !=='auth' ? (
-                <View screen={screen} setScreen={setScreen} /> ) : (
+      <Grid container justifyContent="center" alignItems="center" height="85vh">
+      {screen !== 'auth' ? (
+        <Box sx={{ p: 3 }}>
+          <Typography variant="h6">Welcome {screen}</Typography>
+        </Box>
+      ) : (
+        <Grid item xs={12} sm={8} md={6} lg={4}>
+          <Box
+            sx={{
+              p: 4,
+              borderRadius: 1,
+              boxShadow: 9,
+              bgcolor: 'background.paper',
+            }}
+          >
+            <Box sx={{ mb: 3 }}>
+              <Typography variant="h4" align="center">
+                Login
+              </Typography>
+            </Box>
 
                 <Form onSubmit={handleLogin}>
                     
-                    <Form.Group>
-                        <Form.Label> Email:</Form.Label>
-                        <Form.Control id="email" type="email"  onChange={(event) => setEmail(event.target.value)} 
-                            placeholder="Email:" />
-                    </Form.Group>                    
+                    <TextField
+                required
+                fullWidth
+                id="email"
+                label="Email Address"
+                variant="outlined"
+                margin="normal"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />                    
                     
-                    <Form.Group>
-                        <Form.Label> Password:</Form.Label>
-                        <Form.Control id="password" type="password"  onChange={(event) => setPassword(event.target.value)}
-                            placeholder="Password:" />
-                    </Form.Group>  
+                    <TextField
+            required
+            fullWidth
+            id="password"
+            label="Password"
+            type="password"
+            variant="outlined"
+            margin="normal"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          /> 
             
-                    <Button size = "lg" variant="primary" type="submit" >
-                        Login
+            <Box sx={{ mt: 3 }}>
+            <Button
+              fullWidth
+              variant="contained"
+              size="large"
+              type="submit"
+            >
+              Login
+            </Button>
+          </Box>
+          {error && (
+            <Box sx={{ mt: 2 }}>
+              <Typography color="error">{error.message}</Typography>
+            </Box>
+          )}
+
+          <Box sx={{
+                    display: 'flex',
+                    
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    mt: 1
+                    }}>
+                    <Typography>
+                        Don't have an account?
+                    </Typography>
+                    <Button
+                        variant="text"
+                        component="a"
+                        href="/createuser"
+                        sx={{ textTransform: 'none' }}
+                    >
+                        Sign Up
                     </Button>
-                  
-                </Form>
-            )}            
-            
-        </div>
+                </Box>
+        </Form>
+      </Box>
+    </Grid>
+  )}
+</Grid>
     );
 }
 //

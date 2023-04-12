@@ -16,7 +16,7 @@ const ADD_PATIENT = gql`
     $age: String!
     $diagonosis: String!
     $notes: String!
-    $hcnNo: Int!
+    $hcnNo: String!
   ) {
     addPatient(
       firstName: $firstName
@@ -36,7 +36,7 @@ const AddPatient = () => {
   let navigate = useNavigate();
   //
   let firstName, lastName, age, diagonosis, notes, hcnNo;
-  const [addPatient, { data, loading, error }] = useMutation(ADD_PATIENT);
+  const [createPatient, { data, loading, error }] = useMutation(ADD_PATIENT);
 
   if (loading) return "Submitting...";
   if (error) return `Submission error! ${error.message}`;
@@ -46,14 +46,14 @@ const AddPatient = () => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          addPatient({
+          createPatient({
             variables: {
               firstName: firstName.value,
               lastName: lastName.value,
               age: age.value,
               diagonosis: diagonosis.value,
               notes: notes.value,
-              hcnNo: parseInt(hcnNo.value),
+              hcnNo: hcnNo.value
             },
           });
           //
