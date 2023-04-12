@@ -2,10 +2,53 @@ import React, { useState } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
+import { makeStyles } from '@material-ui/core/styles';
+import RefreshIcon from '@material-ui/icons/Refresh';
+import AddIcon from '@material-ui/icons/Add';
 
+import {
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  IconButton,
+  Tooltip,
+  Typography,
+  CircularProgress,
+  Button,
+} from '@material-ui/core';
+import { DirectionsCar, LocationOn, CheckCircle, Warning } from '@material-ui/icons';
+import moment from 'moment';
+
+const useStyles = makeStyles((theme) => ({
+  table: {
+    minWidth: 650,
+  },
+  tableHead: {
+    fontWeight: 'bold',
+    backgroundColor: theme.palette.primary.light,
+  },
+  green: {
+    color: 'green',
+  },
+  blue: {
+    color: 'blue',
+  },
+  red: {
+    color: 'red',
+  },
+  orange: {
+    color: 'orange',
+  },
+  black: {
+    color: 'black',
+  },
+}));
 const GET_AMBULANCES = gql`
   {
     ambulances {
@@ -18,8 +61,9 @@ const GET_AMBULANCES = gql`
   }
 `;
 const AmbulanceList2 = () => {
+  const classes = useStyles();
   const { loading, error, data, refetch } = useQuery(GET_AMBULANCES);
-  const statusOptions = ["Available", "Unavailable", "En Route"];
+  const statusOptions = ["Available", "Unavailable", "On-Route"];
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
   const [dispatchedAmbulances, setDispatchedAmbulances] = useState([]);
@@ -31,7 +75,7 @@ const AmbulanceList2 = () => {
     console.log('Dispatching ambulance', ambulance._id, 'at', timestamp);
   
     // Update the status of the ambulance to "En Route"
-    ambulance.status = "En Route";
+    ambulance.status = "On-Route";
   
     // Store the dispatch time and ETA in localStorage
     localStorage.setItem(`dispatch_${ambulance._id}`, JSON.stringify({timestamp, eta: ambulance.eta}));
@@ -56,6 +100,7 @@ const AmbulanceList2 = () => {
       localStorage.setItem(`dispatch_${ambulance._id}`, JSON.stringify({timestamp: dispatchInfo.timestamp, eta: dispatchInfo.eta, remainingTime}));
   
       if (remainingTime === 0) {
+        setShowNotification(true)
         clearInterval(intervalId);
         setDispatchedAmbulances(
           dispatchedAmbulances.filter((dispatched) => dispatched._id !== ambulance._id)
@@ -63,8 +108,12 @@ const AmbulanceList2 = () => {
         // Update the status of the ambulance to "Reached Destination"
         ambulance.status = "Reached Destination";
         setNotificationMessage(`Ambulance ${ambulance._id} has reached its destination!`);
-        setShowNotification(true);
+        
         localStorage.removeItem(`dispatch_${ambulance._id}`);
+  
+        // Remove the dispatched ambulance record from the table
+        const updatedData = data.ambulances.filter((a) => a._id !== ambulance._id);
+        refetch({ ...data, ambulances: updatedData });
       }
     }, 1000);
   
@@ -73,29 +122,49 @@ const AmbulanceList2 = () => {
   };
   
   
+  
 
   const handleTrack = (ambulance) => {
     setSelectedAmbulance(ambulance);
     setShowDetails(true);
   }
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
+  if (loading)
+  return (
+  <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '80vh' }}>
+  <CircularProgress />
+  </div>
+  );
+  if (error) return <Typography variant="h6">Error: {error.message}</Typography>;
 
   return (
+    
     <div>
-      <Table>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Crew Members</th>
-            <th>Location</th>
-            <th>Status</th>
-            <th>ETA</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
+      <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+    <Button variant="contained" color="primary" startIcon={<RefreshIcon />} onClick={() => refetch()}>
+      Refresh
+    </Button>
+
+    <Link to="/addambulance" style={{ textDecoration: 'none', marginLeft: '10px' }}>
+      <Button variant="contained" startIcon={<AddIcon />} color="primary">
+        Add Ambulance
+      </Button>
+    </Link>
+  </div>
+
+<TableContainer component={Paper}>
+<Table className={classes.table} aria-label="ambulance table">
+<TableHead>
+<TableRow>
+<TableCell className={classes.tableHead}>ID</TableCell>
+<TableCell className={classes.tableHead}>Crew Members</TableCell>
+<TableCell className={classes.tableHead}>Location</TableCell>
+<TableCell className={classes.tableHead}>Status</TableCell>
+<TableCell className={classes.tableHead}>ETA</TableCell>
+<TableCell className={classes.tableHead}>Actions</TableCell>
+</TableRow>
+</TableHead>
+<TableBody>
           {data.ambulances.map((ambulance, index) => {
             const dispatched = dispatchedAmbulances.find((dispatched) => dispatched._id === ambulance._id);
             const remainingTime = dispatched ? Math.max(
@@ -103,102 +172,101 @@ const AmbulanceList2 = () => {
               0
             ).toFixed(0) : null;
             return (
-              <React.Fragment key={index}>
-                <tr>
-                  <td>{ambulance._id}</td>
-                  <td>{ambulance.crewMembers}</td>
-                  <td>
-                  {ambulance.status === "Unavailable" ? (
-                    "Off-Duty"
-                  ) : (
-                    ambulance.location
-                  )}
-                </td>
-                  <td style={{color:
-  ambulance.status === "Available" ? "green" :
-  ambulance.status === "On-Route" ? "blue" :
-  ambulance.status === "Unavailable" ? "red" :
-  dispatched && ambulance.status !== "Reached Destination" ? "orange" :
-  "black"}}>
-  {dispatched ? (
-    ambulance.status === "Reached Destination" ? "Reached Destination" : "En Route" // Display "Reached Destination" if ambulance has reached its destination
-  ) : (
-    ambulance.status
-  )}
-</td>
-
-                  <td>
-                    {dispatched ? (
-                      <span>{ambulance.eta} minutes</span>
-                    ) : (
-                      <span>{ambulance.eta} minutes</span>
-                    )}
-                  </td>
-                  <td>
+              <TableRow key={index}>
+<TableCell>{ambulance._id}</TableCell>
+<TableCell>{ambulance.crewMembers}</TableCell>
+<TableCell>
+{ambulance.status === 'Unavailable' ? 'Off-Duty' : ambulance.location}
+</TableCell>
+<TableCell
+className={
+dispatched
+? ambulance.status === 'Reached Destination'
+? classes.black
+: classes.orange
+: ambulance.status === 'Available'
+? classes.green
+: ambulance.status === 'On-Route'
+? classes.blue
+: classes.red
+}
+>
+{dispatched ? (
+ambulance.status === 'Reached Destination' ? (
+'Reached Destination'
+) : (
+'On-Route'
+)
+) : (
+ambulance.status
+)}
+</TableCell>
+<TableCell>
+{dispatched ? (
+<span>{ambulance.eta} minutes</span>
+) : (
+<span>{ambulance.eta} minutes</span>
+)}
+</TableCell>
+<TableCell>
                     
 
-                  <Button
-  variant="success"
-  size="sm"
-  className="mx-2"
-  onClick={() =>
-    handleDispatch({
-      ...ambulance,
-      dispatchedAt: new Date().toISOString(),
-    })
-  }
-  disabled={ambulance.status === "Unavailable"}
+<Tooltip title="Dispatch">
+<span>
+<IconButton
+aria-label="dispatch"
+disabled={ambulance.status === 'Unavailable'}
+onClick={() =>
+handleDispatch({
+...ambulance,
+dispatchedAt: new Date().toISOString(),
+})
+}
 >
-  Dispatch
-</Button>
+<DirectionsCar />
+</IconButton>
+</span>
+</Tooltip>
 
-                    <Button
-  variant="info"
-  size="sm"
-  onClick={() => handleTrack(ambulance)}
->
-  Track
-</Button>
+<Tooltip title="Track">
+                  <span>
+                    <IconButton aria-label="track" onClick={() => handleTrack(ambulance)}>
+                      <LocationOn />
+                    </IconButton>
+                  </span>
+                  </Tooltip>
 
-                   
-                  </td>
-                </tr>
-              </React.Fragment>
-            );
-          })}
-        </tbody>
-      </Table>
-      <div className="d-flex justify-content-center">
-        <Button variant="success" size="sm" onClick={() => refetch()}>
-          Refresh
-        </Button>
+                  </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
+  </TableContainer>
+
   
-        <Link to="/addambulance">
-          <Button variant="primary" size="sm" className="mx-2">
-            Add Ambulance
-          </Button>
-        </Link>
-      </div>
-      <Modal show={showNotification} onHide={() => setShowNotification(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Notification</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{notificationMessage}</Modal.Body>
-      </Modal>
-      <Modal show={showDetails} onHide={() => setShowDetails(false)}>
-      <Modal.Header closeButton>
-        <Modal.Title>Ambulance Details</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <p>ID: {selectedAmbulance && selectedAmbulance._id}</p>
-        <p>Crew Members: {selectedAmbulance && selectedAmbulance.crewMembers}</p>
-        <p>Location: {selectedAmbulance && selectedAmbulance.location}</p>
-        <p>Status: {selectedAmbulance && selectedAmbulance.status}</p>
-        <p>ETA: {selectedAmbulance && selectedAmbulance.eta} minutes</p>
-      </Modal.Body>
-    </Modal>
-    </div>
-  );
-        };
+
+  <Modal show={showNotification} onHide={() => setShowNotification(false)}>
+    <Modal.Header closeButton>
+      <Modal.Title>Notification</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>{notificationMessage}</Modal.Body>
+  </Modal>
+
+  <Modal show={showDetails} onHide={() => setShowDetails(false)}>
+    <Modal.Header closeButton>
+      <Modal.Title>Ambulance Details</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <p>ID: {selectedAmbulance && selectedAmbulance._id}</p>
+      <p>Crew Members: {selectedAmbulance && selectedAmbulance.crewMembers}</p>
+      <p>Location: {selectedAmbulance && selectedAmbulance.location}</p>
+      <p>Status: {selectedAmbulance && selectedAmbulance.status}</p>
+      <p>ETA: {selectedAmbulance && selectedAmbulance.eta} minutes</p>
+    </Modal.Body>
+  </Modal>
+</div>
+);
+};
 
 export default AmbulanceList2;
