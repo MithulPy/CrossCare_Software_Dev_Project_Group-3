@@ -47,7 +47,7 @@ import AddBilling from './components/AddBilling';
 import ViewBillingInfo from './components/ViewBillingInfo';
 import AddIncidentReport from './components/AddIncidentReport';
 import IncidentApprovalReject from './components/IncidentApprovalReject';
-
+import AddPatientRecord from './components/AddPatientRecord';
 import AmbulanceList2 from './components/AmbulanceList2';
 
 //
@@ -119,6 +119,7 @@ const [color,changeColor] =useState("#FFDAB9");
 
           <Route path = "ambulancelist2" element={<AmbulanceList2 />} />
 
+          <Route path = "addpatient" element={<AddPatientRecord />} />
 
 
               {/*PATIENT DETAILS*/ }
