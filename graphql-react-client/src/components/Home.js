@@ -14,6 +14,16 @@ function Home(props)
     <h4>Welcome to our website</h4>
     <p> This is a system that will help you to manage your ambulance service system. </p>
     <p> You can add, edit, delete and view your ambulance service system. </p>
+    <p>Done by</p>
+    <p>
+        <ol style={{ listStyleType: 'upper-roman' }}>
+            <li>Daivik Shetty</li>
+            <li>Mithul Koshy</li>
+            <li>Teena Abraham</li>
+            <li>Vimal Mathew</li>
+            <li>Vinny Vinnu</li>
+        </ol>   
+    </p>
 </div>
 
 
