@@ -74,7 +74,10 @@ function Login() {
       <Grid container justifyContent="center" alignItems="center" height="85vh">
       {screen !== 'auth' ? (
         <Box sx={{ p: 3 }}>
-          <Typography variant="h6">Welcome {screen}</Typography>
+          <Typography variant="h5">Welcome {screen}</Typography>
+          <br/>
+          <br/>
+          <View screen={screen}/>
         </Box>
       ) : (
         <Grid item xs={12} sm={8} md={6} lg={4}>

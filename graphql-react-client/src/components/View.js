@@ -91,9 +91,6 @@ function View (props) {
             default:
               return <div>
 
-       <p>{screen}</p>
-      <p>{data}</p>
-
       <button onClick={() => setCourseOperation('addPatient')}>Add Patient</button>
       <button  className="mx-2" onClick={() => setCourseOperation('approvedenyincident')}>Approve or Deny Incident</button>
       <button  className="mx-2" onClick={() => setCourseOperation('createambulancerequest')}>Create Ambulance Request</button>
