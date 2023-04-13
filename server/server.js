@@ -12,7 +12,7 @@ const { graphqlHTTP } = require('express-graphql');
 var ambulanceRequestSchema = require('./graphql/ambulanceRequestSchemas');
 
 var incidentSchema = require('./graphql/incidentReportSchemas');
-var patientRecordSchema = require('./graphql/patientRecordSchemas');
+var patientRecordSchema = require('./graphql/patientRecordSchema');
 
 const userSchema = require('./graphql/userSchemas');
 const ambulanceSchema = require('./graphql/ambulanceSchemas');
