@@ -32,10 +32,6 @@ import DispatchDetails from './components/DispatchDetails';
 
 
 import Login from './components/Login';
-import StudentList from './components/StudentList';
-import AddStudent from './components/AddStudent';
-import EditStudent from './components/EditStudent';
-import DeleteStudent from './components/DeleteStudent';
 import PatientList from './components/PatientList';
 import AddPatient from './components/AddPatient';
 import EditPatient from './components/EditPatient';
@@ -111,11 +107,6 @@ const [color,changeColor] =useState("#FFDAB9");
         <Route path = "incidentlist" element={<IncidentList />} />
         <Route path = "createincident" element={<AddIncidentReport />} />
         <Route path = "incidentreportapproval" element={<IncidentApprovalReject />} />
-
-          <Route path = "studentlist" element={<StudentList />} />
-          <Route path = "addstudent" element={<AddStudent />} />
-          <Route path = "editstudent" element={<EditStudent />} />
-          <Route path = "deletestudent" element={<DeleteStudent />} />
 
           <Route path = "ambulancelist2" element={<AmbulanceList2 />} />
 
