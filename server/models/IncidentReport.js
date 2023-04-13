@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-// Define a new 'StudentSchema'
+// Define a new 'IncidentSchema'
 const IncidentSchema = new Schema({
     id: String,
     issue:String,

@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//Model schema for Ambulance
 const AmbulanceSchema = new Schema({
   ambulanceId: {
     type: String,
-    //required: true
   },
   crewMembers: {
     type: String,

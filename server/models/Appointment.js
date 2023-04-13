@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+//Model schema for Appointment
 
 const AppointmentSchema = new Schema({
     id: {

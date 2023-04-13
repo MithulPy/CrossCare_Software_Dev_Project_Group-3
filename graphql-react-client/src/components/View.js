@@ -1,4 +1,3 @@
-//View.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddPatient from './AddPatient';
@@ -52,18 +51,7 @@ function View (props) {
       console.error(err.message);
     }
   };
-  //
-  /*
-  const handleLogOut = async () => {
-    try {
-      await logOut();
-      setScreen('auth')
-      navigate('/login'); // navigate to the Login component after logging out
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-  */
+
   const handleLogOut = () => {
     logOut()
       .then(() => {

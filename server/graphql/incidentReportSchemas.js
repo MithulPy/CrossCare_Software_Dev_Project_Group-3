@@ -9,7 +9,7 @@ var GraphQLInt = require('graphql').GraphQLInt;
 var GraphQLDate = require('graphql-date');
 var IncidentModal = require('../models/IncidentReport');
 //
-// Create a GraphQL Object Type for Student model
+// Create a GraphQL Object Type for Incident model
 const incidentType = new GraphQLObjectType({
     name: 'incident',
     fields: function () {
@@ -42,7 +42,7 @@ const incidentType = new GraphQLObjectType({
     }
   });
   //
-  // create a GraphQL query type that returns all students or a student by id
+  // create a GraphQL query type that returns all incidents or a incident by id
   const queryType = new GraphQLObjectType({
     name: 'Query',
     fields: function () {

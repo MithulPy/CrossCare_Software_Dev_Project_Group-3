@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { gql, useQuery, useMutation } from '@apollo/client';
 import Table from 'react-bootstrap/Table';
 import { Link } from 'react-router-dom';
-//import Button from 'react-bootstrap/Button';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import { makeStyles } from '@material-ui/core/styles';

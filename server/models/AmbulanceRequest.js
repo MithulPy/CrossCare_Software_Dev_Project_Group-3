@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+//Model schema for Ambulance Request
+
 const AmbulanceRequestSchema = new Schema({
      
   ambulanceRequestId: {

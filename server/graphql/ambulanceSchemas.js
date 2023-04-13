@@ -7,7 +7,7 @@ var GraphQLID = require('graphql').GraphQLID;
 var GraphQLString = require('graphql').GraphQLString;
 var GraphQLInt = require('graphql').GraphQLInt;
 var GraphQLDate = require('graphql-date');
-var AmbulanceModel = require('../models/ambulance');
+var AmbulanceModel = require('../models/Ambulance');
 const nodemailer = require('nodemailer')
 
 //creating transporter object for email transfer

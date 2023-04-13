@@ -11,7 +11,7 @@ var PatientModal = require('../models/Patient');
 var BillingInfoModal = require('../models/BillingInfo');
 const BillingInfo = require('../models/BillingInfo');
 //
-// Create a GraphQL Object Type for Student model
+// Create a GraphQL Object Type for Patient model
 const patientType = new GraphQLObjectType({
     name: 'patient',
     fields: function () {
