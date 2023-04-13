@@ -2,7 +2,7 @@
 
 Pre-requisite for running the application
 
-1.Dowload and install MongoDB
+1.Download and install MongoDB
 
 2.Run "C:\Program Files\MongoDB\Server\6.0\bin\mongod.exe"
 
