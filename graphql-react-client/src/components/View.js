@@ -14,8 +14,7 @@ const LOG_OUT_MUTATION = gql`
 // query to check if user is logged in
 const LOGGED_IN_USER = gql`
   query IsLoggedIn {
-    isLoggedIn
-      
+    isLoggedIn 
   }
 `;
 //
@@ -55,7 +54,8 @@ function View (props) {
   const handleLogOut = () => {
     logOut()
       .then(() => {
-        setScreen('auth')
+        //setScreen('auth')
+        localStorage.removeItem('crosscarename')
         navigate('/login'); // navigate to the Login component after logging out
       })
       .catch((err) => {
