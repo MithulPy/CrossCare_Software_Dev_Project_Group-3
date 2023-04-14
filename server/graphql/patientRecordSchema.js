@@ -56,6 +56,7 @@ const queryType = new GraphQLObjectType({
         },
         resolve: function (root, params) {
           const appointments = AppointmentModel.find(params).exec()
+          console.log(appointments)
           if (!appointments) {
             throw new Error('Error')
           }

@@ -83,6 +83,8 @@ const [color,changeColor] =useState("#FFDAB9");
               {/*<Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>*/}
               {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
               <Nav.Link as={Link} to="/patientlist">Patient List</Nav.Link>
+              {/* {localStorage.getItem('crosscarename')?<><h5 >{localStorage.getItem('crosscarename')}</h5></>:<></>} */}
+              
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -27,7 +27,6 @@ const userType = new GraphQLObjectType({
     name: 'user',
     fields: function () {
       return {
-        
         userName: {
           type: GraphQLString
         },
@@ -36,9 +35,7 @@ const userType = new GraphQLObjectType({
         },
         password: {
           type: GraphQLString
-        }
-        
-        
+        } 
       }
     }
   });
@@ -50,11 +47,11 @@ const userType = new GraphQLObjectType({
   // and it defines the different fields or query/mutations that are available
   // in this type. 
   //
+
   const queryType = new GraphQLObjectType({
     name: 'Query',
     fields: function () {
       return {
-
         users: {
           type: new GraphQLList(userType),
           resolve: function () {
@@ -89,10 +86,8 @@ const userType = new GraphQLObjectType({
               name: 'email',
               type: GraphQLString
             }
-
           },
           resolve: function (root, params, context) {
-            //
             console.log(params)
             console.log('in isLoggedIn.....')
            // console.log(context.req.cookies['token'])
@@ -179,9 +174,7 @@ const userType = new GraphQLObjectType({
             password: {
               name: 'password',
               type: GraphQLString
-
             }
-
           },
 
           resolve: async function (root, params, context) {

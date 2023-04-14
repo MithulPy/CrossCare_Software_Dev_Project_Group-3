@@ -32,17 +32,29 @@ const LOGGED_IN_USER = gql`
 // Login function component
 function Login() {
     //
-    let navigate = useNavigate()
-    // loginUser is a function that can be called to execute
-    // the LOGIN_USER mutation, and { data, loading, error } 
-    // is an object that contains information about the state of the mutation.
-    const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
-    //
+
+        //
     //state variable for the screen, admin or user
     const [screen, setScreen] = useState('auth');
     //store input field data, user name and password
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
+
+    useEffect(()=>{
+      if(localStorage.getItem('crosscarename')){
+        setScreen(localStorage.getItem('crosscarename'))
+      }
+      else{
+        setScreen('auth')
+      }
+    },[localStorage.getItem('crosscarename')])
+
+    let navigate = useNavigate()
+    // loginUser is a function that can be called to execute
+    // the LOGIN_USER mutation, and { data, loading, error } 
+    // is an object that contains information about the state of the mutation.
+    const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+
     //
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -52,11 +64,13 @@ function Login() {
             refetchQueries: [{ query: LOGGED_IN_USER }],
           });
           console.log('Logged in as:', data.loginUser);
+          localStorage.setItem('crosscarename',data.loginUser)
           setScreen(data.loginUser);
         } catch (error) {
           console.error('Login error:', error);
         }
       };
+
       // a destructuring assignment that uses the useQuery hook from
       //  the @apollo/client library to fetch data from a GraphQL server.
       const { data: isLoggedInData, loading: isLoggedInLoading, error: isLoggedInError } = useQuery(LOGGED_IN_USER);
