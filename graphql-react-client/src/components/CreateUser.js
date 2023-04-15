@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form';
@@ -10,6 +10,10 @@ import {
     Grid,
     TextField,
     Typography,
+    FormControl,
+    InputLabel,
+    Select,
+    MenuItem,
     Link,
   } from '@mui/material';
 //
@@ -19,11 +23,12 @@ import "./entryform.css"
 //
 //
 const CREATE_USER = gql`
-    mutation CreateUser( $userName: String!,  $email: String!, $password: String! ) {
-        createUser( userName: $userName, email: $email, password: $password  ) {
+    mutation CreateUser( $userName: String!,  $email: String!, $password: String!,$userType:String! ) {
+        createUser( userName: $userName, email: $email, password: $password,userType:$userType  ) {
             userName
             email
             password
+            userType
 
         }
 
@@ -34,8 +39,10 @@ const CreateUser = () => {
     //
     let navigate = useNavigate()
     //
-    let userName, email, password ;
+    let userName, email, password,userType ;
     const [createUser, { data, loading, error }] = useMutation(CREATE_USER);
+    const [type, setType] = useState("Operation/Compliance");
+
 
     if (loading) return 'Submitting...';
     if (error) return `Submission error! ${error.message}`;
@@ -64,11 +71,13 @@ const CreateUser = () => {
                       userName: userName.value,
                       email: email.value,
                       password: password.value,
+                      userType: userType.value,
                     },
                   });
                   userName.value = '';
                   email.value = '';
                   password.value = '';
+                  userType.value = '';
                   navigate('/home');
                 }}
               >
@@ -101,6 +110,25 @@ const CreateUser = () => {
                   margin="normal"
                   inputRef={(node) => (password = node)}
                 />
+                 
+                 <FormControl fullWidth>
+  <InputLabel id="demo-simple-select-label">User Type</InputLabel>
+  <Select
+    value={type}
+    label="User Type"
+    name="userType"
+    id="userType"
+    inputRef={(node) => (userType = node)}
+    onChange={e => {
+      console.log("e.target.value", e.target.value);
+      setType(e.target.value);
+    }}
+  >
+    <MenuItem value={'OperationCompliance'}>Operation/Compliance</MenuItem>
+    <MenuItem value={'HealthcareProfessional'}>Healthcare-Professional</MenuItem>
+    <MenuItem value={'EmergencyPersonnel'}>Emergency Personnel</MenuItem>
+  </Select>
+</FormControl>
                 <Box sx={{ mt: 3 }}>
                   <Button
                     fullWidth

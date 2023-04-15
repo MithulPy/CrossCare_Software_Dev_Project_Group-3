@@ -36,6 +36,9 @@ const userType = new GraphQLObjectType({
         },
         password: {
           type: GraphQLString
+        },
+        userType:{
+          type: GraphQLString
         }
         
         
@@ -129,7 +132,7 @@ const userType = new GraphQLObjectType({
             console.log('email from payload: ', payload.email)
             // Finally, token is ok, return the email given in the token
             // res.status(200).send({ screen: payload.email });
-            return payload.email;
+            return payload;
 
           }
         },
@@ -154,6 +157,9 @@ const userType = new GraphQLObjectType({
               type: new GraphQLNonNull(GraphQLString)
             },
             password: {
+              type: new GraphQLNonNull(GraphQLString)
+            },
+            userType: {
               type: new GraphQLNonNull(GraphQLString)
             }
             
@@ -203,6 +209,7 @@ const userType = new GraphQLObjectType({
                 console.log("Password doesn't match!")
               } else {
                 console.log("Password matches!")
+                console.log(JSON.stringify(userInfo))
               }
             })
             // sign the given payload (arguments of sign method) into a JSON Web Token 
@@ -215,7 +222,8 @@ const userType = new GraphQLObjectType({
             // here, the max age is in milliseconds
             context.res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000, httpOnly: true});
             //context.res.status(200).send({ screen: userInfo.username });
-            return userInfo.email; 
+            console.log(userInfo.toObject({ getters: true, versionKey: false }))
+            return JSON.stringify(userInfo)
             //return { screen: userInfo.username }
             //return {token, userId: userInfo._id}
           } //end of resolver function

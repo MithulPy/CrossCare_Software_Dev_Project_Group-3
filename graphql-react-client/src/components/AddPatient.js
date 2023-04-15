@@ -91,7 +91,7 @@ const AddPatient = () => {
         </Form.Group>
 
         <Form.Group>
-          <Form.Label> AGE:</Form.Label>
+          <Form.Label> Age:</Form.Label>
           <Form.Control
             type="text"
             name="age"

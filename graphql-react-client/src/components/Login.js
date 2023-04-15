@@ -32,17 +32,29 @@ const LOGGED_IN_USER = gql`
 // Login function component
 function Login() {
     //
-    let navigate = useNavigate()
-    // loginUser is a function that can be called to execute
-    // the LOGIN_USER mutation, and { data, loading, error } 
-    // is an object that contains information about the state of the mutation.
-    const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
-    //
+
+        //
     //state variable for the screen, admin or user
     const [screen, setScreen] = useState('auth');
     //store input field data, user name and password
     let [email, setEmail] = useState('');
     let [password, setPassword] = useState('');
+
+    useEffect(()=>{
+      const crosscarename = localStorage.getItem('crosscarename');
+      if(crosscarename && crosscarename !== "undefined" && crosscarename !== 'null') {
+        setScreen(crosscarename);
+      } else {
+        setScreen('auth');
+      }
+    },[]);
+
+    let navigate = useNavigate()
+    // loginUser is a function that can be called to execute
+    // the LOGIN_USER mutation, and { data, loading, error } 
+    // is an object that contains information about the state of the mutation.
+    const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+
     //
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -51,12 +63,15 @@ function Login() {
             variables: { email, password },
             refetchQueries: [{ query: LOGGED_IN_USER }],
           });
-          console.log('Logged in as:', data.loginUser);
-          setScreen(data.loginUser);
+          console.log('Logged in as:', JSON.parse(data.loginUser).userName);
+          localStorage.setItem('crosscarename',JSON.parse(data.loginUser).userName)
+          localStorage.setItem('userType',JSON.parse(data.loginUser).userType)
+          setScreen(JSON.parse(data.loginUser).userName);
         } catch (error) {
           console.error('Login error:', error);
         }
       };
+
       // a destructuring assignment that uses the useQuery hook from
       //  the @apollo/client library to fetch data from a GraphQL server.
       const { data: isLoggedInData, loading: isLoggedInLoading, error: isLoggedInError } = useQuery(LOGGED_IN_USER);

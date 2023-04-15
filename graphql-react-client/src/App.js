@@ -49,6 +49,8 @@ import AmbulanceList2 from './components/AmbulanceList2';
 //
 function App() {
 const [color,changeColor] =useState("#FFDAB9");
+
+//const userType = JSON.parse(localStorage.getItem("userType"));
   return (
     <div style={{background: color}}>
     <Router>
@@ -60,28 +62,12 @@ const [color,changeColor] =useState("#FFDAB9");
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
               <Nav.Link as={Link} to="/home" >Home</Nav.Link>
+              <Nav.Link as={Link} to="/createuser">Sign-Up</Nav.Link>
               <Nav.Link as={Link} to="/login">Login</Nav.Link>
-              <Nav.Link as={Link} to="/createuser">Create User</Nav.Link>
-              {/*<Nav.Link as={Link} to="/createambulancerequest">Create Ambulance Request</Nav.Link>*/}
-              {/* <Nav.Link as={Link} to="/userlist">User List</Nav.Link> */}
 
-
-              <Nav.Link as={Link} to="/patientrecords">
-                Patient Records
-              </Nav.Link>
-              <Nav.Link as={Link} to="/ambulancelist2">Ambulance List</Nav.Link>
-              <Nav.Link as={Link} to="/incidentlist">Incident List</Nav.Link>
-
-
-
-            
-
-              {/* <Nav.Link as={Link} to="/addstudent">Add Student</Nav.Link>
-              <Nav.Link as={Link} to="/studentlist">Student List</Nav.Link> */}
-
-              
-              {/*<Nav.Link as={Link} to="/addpatient">Add Patient</Nav.Link>*/}
-              {/*<Nav.Link as={Link} to="/editpatient">Edit Patient</Nav.Link>*/}
+             {/* <Nav.Link as={Link} to="/patientrecords">
+                Patient Records 
+  </Nav.Link>*/}
               <Nav.Link as={Link} to="/patientlist">Patient List</Nav.Link>
             </Nav>
           </Navbar.Collapse>
