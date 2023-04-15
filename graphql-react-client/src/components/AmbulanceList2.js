@@ -59,9 +59,18 @@ const GET_AMBULANCES = gql`
     }
   }
 `;
+const SEND_EMAIL = gql`
+  mutation emailOnDispatch($ambId: String!, $rxEmail: String!){
+    emailOnDispatch(ambId: $ambId,rxEmail: $rxEmail) {
+      ambId,
+      rxEmail
+    }
+  }
+`;
 const AmbulanceList2 = () => {
   const classes = useStyles();
   const { loading, error, data, refetch } = useQuery(GET_AMBULANCES);
+  const [sendEmail, {data1,loading1, error1 }] = useMutation(SEND_EMAIL);
   const statusOptions = ["Available", "Unavailable", "On-Route"];
   const [showNotification, setShowNotification] = useState(false);
   const [notificationMessage, setNotificationMessage] = useState('');
@@ -72,7 +81,12 @@ const AmbulanceList2 = () => {
   const handleDispatch = (ambulance) => {
     const timestamp = Date.now();
     console.log('Dispatching ambulance', ambulance._id, 'at', timestamp);
-  
+    sendEmail({
+      variables: {
+        ambId: "23",
+        rxEmail: "vimal@gmail.com",
+      },
+    });
     // Update the status of the ambulance to "En Route"
     ambulance.status = "On-Route";
   
