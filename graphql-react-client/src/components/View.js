@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AddPatient from './AddPatient';
 //
+import './View.css'
 import { useQuery, useMutation, gql } from '@apollo/client';
 import IncidentApprovalReject from './IncidentApprovalReject';
 import CreateAmbulanceRequest from './CreateAmbulanceRequest';
@@ -92,20 +93,39 @@ function View (props) {
               return <IncidentList/>
             default:
               return <div>
-      {(userType === 'OperationCompliance' || userType === 'HealthcareProfessional')?(
-      <button onClick={() => setCourseOperation('addPatient')}>Add Patient</button>):null}
-      {userType === 'OperationCompliance'?(
-      <button  className="mx-2" onClick={() => setCourseOperation('approvedenyincident')}>Approve or Deny Incident</button>):null}
-      {(userType === 'OperationCompliance' || userType === 'EmergencyPersonnel')?(
-      <button  className="mx-2" onClick={() => setCourseOperation('createambulancerequest')}>Create Ambulance Request</button>):null}
-      {userType === 'OperationCompliance'?(
-      <button  className="mx-2" onClick={() => setCourseOperation('createuser')}>Create User</button>):null}
-      {userType === 'EmergencyPersonnel'?(
-      <button  className="mx-2" onClick={() => setCourseOperation('ambulancelist')}>Dispatch Ambulance List</button>):null}
-       {userType === 'OperationCompliance'?(
-      <button  className="mx-2" onClick={() => setCourseOperation('incidentlist')}>Cross Care Incidents</button>):null}
-      <button  className="mx-2" onClick={handleLogOut}>Log out</button>   
-              </div>         
+              {(userType === 'OperationCompliance' || userType === 'HealthcareProfessional') ? (
+                <button onClick={() => setCourseOperation('addPatient')}>Add Patient</button>
+              ) : null}
+              {userType === 'OperationCompliance' ? (
+                <button className="mx-2" onClick={() => setCourseOperation('approvedenyincident')}>
+                  Approve or Deny Incident
+                </button>
+              ) : null}
+              {(userType === 'OperationCompliance' || userType === 'EmergencyPersonnel') ? (
+                <button className="mx-2" onClick={() => setCourseOperation('createambulancerequest')}>
+                  Create Ambulance Request
+                </button>
+              ) : null}
+              {userType === 'OperationCompliance' ? (
+                <button className="mx-2" onClick={() => setCourseOperation('createuser')}>
+                  Create User
+                </button>
+              ) : null}
+              {userType === 'EmergencyPersonnel' ? (
+                <button className="mx-2" onClick={() => setCourseOperation('ambulancelist')}>
+                  Dispatch Ambulance List
+                </button>
+              ) : null}
+              {userType === 'OperationCompliance' ? (
+                <button className="mx-2" onClick={() => setCourseOperation('incidentlist')}>
+                  Cross Care Incidents
+                </button>
+              ) : null}
+              <button className="mx-2" onClick={handleLogOut}>
+                Log out
+              </button>
+            </div>
+                
            
           }
         })()
