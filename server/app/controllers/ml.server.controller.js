@@ -42,5 +42,6 @@ exports.heartDiseasePredict = async (req, res) => {
 const resultArray = await results.array();
 console.log(resultArray[0][0])
 // Send the response
-res.send({ result: resultArray[0][0] });
+res.status(200).json(
+  {result: resultArray[0][0] });
 };

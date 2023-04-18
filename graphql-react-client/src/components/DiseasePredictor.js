@@ -35,6 +35,7 @@ function DiseasePredictor(props) {
     e.preventDefault();
     try {
       const response = await axios.post(apiUrl, modelAttr);
+      console.log(response);
       setShowLoading(false);
       const probability = response.data;
       let title, bodyMsg;
