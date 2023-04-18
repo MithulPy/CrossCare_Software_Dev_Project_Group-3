@@ -25,7 +25,7 @@ function DiseasePredictor(props) {
  
 
 
-  const apiUrl = "http://localhost:5000/api/ml/heartdisease";
+  const apiUrl = "http://localhost:3000/api/ml/heartdisease";
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);
@@ -37,7 +37,7 @@ function DiseasePredictor(props) {
       const response = await axios.post(apiUrl, modelAttr);
       console.log(response);
       setShowLoading(false);
-      const probability = response.data;
+      const probability = response.data.result;
       let title, bodyMsg;
       if (probability < 0.33) {
         title = "Good";
