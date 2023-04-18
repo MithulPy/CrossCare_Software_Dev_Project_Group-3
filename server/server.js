@@ -3,6 +3,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const { stitchSchemas } = require('@graphql-tools/stitch');
 
+
 // Load the module dependencies
 const configureMongoose = require('./config/mongoose');
 const configureExpress = require('./config/express');
@@ -43,6 +44,7 @@ const app = configureExpress();
 const corsOptions = {
   origin: ["http://localhost:3000"], //included origin as true
   credentials: true, //included credentials as true
+  methods: ['GET', 'POST']
 };
 app.use(cors(corsOptions));
 //
@@ -63,6 +65,16 @@ app.use('/graphql', graphqlHTTP( (request, response) =>  {
     }
   }
 }));
+
+// Create a REST API endpoint
+app.get('/api', (req, res) => {
+  // Handle REST API request
+  res.json({ message: 'Hello from REST API!' });
+});
+
+// Listen on port 5000 and log the status
+app.listen(5000);
+console.log("Server running at http://localhost:5000/");
 //
 // Use the Express application instance to listen to the '4000' port
 app.listen(4000, () => console.log('Express GraphQL Server Now Running On http://localhost:4000/graphql'));
