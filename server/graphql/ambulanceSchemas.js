@@ -141,7 +141,7 @@ const mutation = new GraphQLObjectType({
           transporter.sendMail({
             from: "crosscare2023@outlook.com", // sender address
             to: "teenacentennial2022@gmail.com", // list of receivers
-            subject: "CrossCare Ambulance Disptached", // Subject line
+            subject: "CrossCare Ambulance Dispatched Successfully!", // Subject line
             text: `An ambulance has been dispatched successfully at ${new Date()} \n\nThank You\nCrossCare Team`, // plain text body  
           }, (error, info) => {
             if (error) {

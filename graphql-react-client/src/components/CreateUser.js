@@ -78,6 +78,7 @@ const CreateUser = () => {
                   email.value = '';
                   password.value = '';
                   userType.value = '';
+                  alert("User Created Successfully");
                   navigate('/home');
                 }}
               >
