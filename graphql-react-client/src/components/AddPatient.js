@@ -3,12 +3,17 @@ import { gql, useMutation } from "@apollo/client";
 import Spinner from "react-bootstrap/Spinner";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-//
+
+
+//@Crosscare-Group6
+//Mithul,Daivik,Teena,Vimal and Vinny
+
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./entryform.css";
-//
-//
+
+//GRAPHQL MUTATION TO ADD A PATIENT
+
 const ADD_PATIENT = gql`
   mutation AddPatient(
     $firstName: String!
@@ -30,7 +35,7 @@ const ADD_PATIENT = gql`
     }
   }
 `;
-//function component to add a student
+//function component to add a Patient
 const AddPatient = () => {
   //
   let navigate = useNavigate();
