@@ -9,6 +9,7 @@ import CreateAmbulanceRequest from './CreateAmbulanceRequest';
 import CreateUser from './CreateUser';
 import AmbulanceList2 from './AmbulanceList2';
 import IncidentList from './IncidentList';
+import DiseasePredictor from './DiseasePredictor';
 // mutation to log the user out
 const LOG_OUT_MUTATION = gql`
   mutation LogOut {
@@ -91,6 +92,9 @@ function View (props) {
 
             case 'incidentlist':
               return <IncidentList/>
+
+            case 'diseaseprediction':
+              return <DiseasePredictor/>
             default:
               return <div>
               {(userType === 'OperationCompliance' || userType === 'HealthcareProfessional') ? (
@@ -119,6 +123,11 @@ function View (props) {
               {userType === 'OperationCompliance' ? (
                 <button className="mx-2" onClick={() => setCourseOperation('incidentlist')}>
                   Cross Care Incidents
+                </button>
+              ) : null}
+              {userType === 'HealthcareProfessional' || userType === 'OperationCompliance' ? (
+                <button className="mx-2" onClick={() => setCourseOperation('diseaseprediction')}>
+                  Disease Prediction
                 </button>
               ) : null}
               <button className="mx-2" onClick={handleLogOut}>
