@@ -54,15 +54,16 @@ const IncidentApprovalReject = ({ reportData }) => {
     };
 
     return (
-    <div className='App'>
-      <table className="table m-5" style={{backgroundColor: "#ffdab9"}}>
-                        <thead>
+      <div className='App'>
+      <table className="table table-striped table-bordered table-hover m-5" style={{backgroundColor: "#ffdab9", borderRadius: "10px"}}>
+                        <thead style={{backgroundColor: "#f8d7ba", fontWeight: "bold"}}>
                             <tr>
                                 <th scope="col">Case Number</th>
                                 <th scope="col">Location</th>
-                                <th scope="col">Description of issue</th>
+                                <th scope="col">Description of Issue</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Reporter</th>
+                                <th scope="col">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -80,22 +81,22 @@ const IncidentApprovalReject = ({ reportData }) => {
                     <>
                       <Button
                         type="button"
-                        variant="primary"
+                        variant="outline-success"
                         onClick={() => handleApprove(elem._id)}
                       >
                         Approve
                       </Button>
                       <Button
                         type="button"
-                        variant="danger"
+                        variant="outline-danger"
                         onClick={() => handleReject(elem._id)}
                       >
                         Reject
                       </Button>
                     </>
                   )}
-                  {elem.status === 'Approved' && <span>Approved</span>}
-                  {elem.status === 'Rejected' && <span>Rejected</span>}
+                  {elem.status === 'Approved' && <span style={{color: "green", fontWeight: "bold"}}>Approved</span>}
+                  {elem.status === 'Rejected' && <span style={{color: "red", fontWeight: "bold"}}>Rejected</span>}
                 </td>
                                         </tr>
                                     )
@@ -105,7 +106,8 @@ const IncidentApprovalReject = ({ reportData }) => {
                     </table>
 
       
-    </div>
+</div>
+
   );
 }
 
